@@ -1,1 +1,2484 @@
-<iframe src="https://www.retrogames.cc/embed/46912-pokemon-evolved.html" width="1680" height="1050" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Evolution - Portal Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        :root {
+            --primary-blue: #2C6CB0;
+            --secondary-blue: #1B4F9E;
+            --accent-yellow: #FFCB05;
+            --accent-red: #FF0000;
+            --dark-bg: #0A0E1F;
+            --medium-bg: #151A30;
+            --light-bg: #1F2542;
+            --text-primary: #F0F8FF;
+            --text-secondary: #B8C7E8;
+            --gradient-primary: linear-gradient(145deg, var(--primary-blue), var(--secondary-blue));
+            --gradient-accent: linear-gradient(145deg, var(--accent-yellow), #FF9E00);
+            --gradient-dark: linear-gradient(145deg, var(--dark-bg), var(--medium-bg));
+            --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(44, 108, 176, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 203, 5, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(31, 37, 66, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oxanium', cursive;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(44, 108, 176, 0.4);
+        }
+        
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: #2C6CB0;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .btn-accent:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 203, 5, 0.4);
+        }
+        
+        /* ===== HEADER E NAVEGAÇÃO ===== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 31, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(44, 108, 176, 0.3);
+            transition: var(--transition);
+            padding: 15px 0;
+        }
+        
+        .main-header.scrolled {
+            padding: 10px 0;
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--secondary-blue);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .logo-text {
+            font-family: 'Oxanium', cursive;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent-yellow), #FFE066);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: -5px;
+            letter-spacing: 2px;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-yellow);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-yellow);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 70% 20%, rgba(44, 108, 176, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(255, 203, 5, 0.2) 0%, transparent 40%);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-text {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent-yellow), #FFE066, #FFFFFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent-yellow);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-game-container {
+            position: relative;
+            background: var(--gradient-dark);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-heavy);
+            border: 2px solid rgba(44, 108, 176, 0.5);
+            overflow: hidden;
+        }
+        
+        .hero-game-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 203, 5, 0.05) 50%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .game-frame-container {
+            position: relative;
+            z-index: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            border: 3px solid var(--light-bg);
+        }
+        
+        .game-frame {
+            width: 100%;
+            height: 500px;
+            display: block;
+            border: none;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            background: var(--medium-bg);
+            position: relative;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 108, 176, 0.1), rgba(255, 203, 5, 0.05));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--primary-blue);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            color: white;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent-yellow);
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* ===== CURIOSITIES SECTION ===== */
+        .curiosities-section {
+            background: var(--dark-bg);
+        }
+        
+        .curiosities-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .curiosity-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .curiosity-tab {
+            padding: 15px 30px;
+            background: var(--light-bg);
+            border: none;
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .curiosity-tab:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .curiosity-tab.active {
+            background: var(--gradient-accent);
+            color: var(--secondary-blue);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .curiosity-content {
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            box-shadow: var(--shadow-heavy);
+            border: 2px solid rgba(44, 108, 176, 0.3);
+        }
+        
+        .curiosity-item {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .curiosity-item.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .curiosity-title {
+            font-size: 2.2rem;
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .curiosity-title i {
+            font-size: 2.5rem;
+        }
+        
+        .curiosity-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .curiosity-image {
+            width: 100%;
+            height: 300px;
+            background: var(--gradient-dark);
+            border-radius: 12px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--accent-yellow);
+            box-shadow: var(--shadow-light);
+        }
+        
+        /* ===== REGIONS SECTION ===== */
+        .regions-section {
+            background: var(--medium-bg);
+        }
+        
+        .regions-slider {
+            display: flex;
+            gap: 40px;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) var(--dark-bg);
+        }
+        
+        .regions-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .regions-slider::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+            border-radius: 10px;
+        }
+        
+        .regions-slider::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 10px;
+        }
+        
+        .region-card {
+            min-width: 300px;
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .region-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .region-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            text-align: center;
+        }
+        
+        .region-name {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .region-body {
+            padding: 25px;
+        }
+        
+        .region-pokemon {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .pokemon-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--secondary-blue);
+            font-size: 1.5rem;
+        }
+        
+        .region-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* ===== EVOLUTION SECTION ===== */
+        .evolution-section {
+            background: var(--dark-bg);
+        }
+        
+        .evolution-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .evolution-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .evolution-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .evolution-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .evolution-content {
+            width: 45%;
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-light);
+            border: 2px solid rgba(44, 108, 176, 0.3);
+        }
+        
+        .evolution-title {
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .evolution-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .evolution-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-light);
+            z-index: 1;
+        }
+        
+        /* ===== GAMEPLAY SECTION ===== */
+        .gameplay-section {
+            background: var(--medium-bg);
+        }
+        
+        .gameplay-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .gameplay-card {
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        
+        .gameplay-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .gameplay-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            text-align: center;
+        }
+        
+        .gameplay-title {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .gameplay-body {
+            padding: 25px;
+        }
+        
+        .gameplay-list {
+            list-style: none;
+        }
+        
+        .gameplay-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .gameplay-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .gameplay-list i {
+            color: var(--accent-yellow);
+        }
+        
+        /* ===== DOWNLOAD SECTION ===== */
+        .download-section {
+            background: var(--dark-bg);
+            text-align: center;
+        }
+        
+        .download-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 60px 40px;
+            box-shadow: var(--shadow-heavy);
+            border: 2px solid rgba(44, 108, 176, 0.3);
+        }
+        
+        .download-title {
+            font-size: 2.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .download-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .download-card {
+            background: var(--medium-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            min-width: 250px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-yellow);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .download-icon {
+            font-size: 3rem;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .download-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: var(--medium-bg);
+            padding: 70px 0 30px;
+            border-top: 2px solid rgba(44, 108, 176, 0.3);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-yellow);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: var(--shadow-heavy);
+            border: 2px solid var(--accent-yellow);
+            animation: slideUp 0.4s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            color: var(--accent-yellow);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--accent-red);
+        }
+        
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-text {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .main-nav ul {
+                gap: 25px;
+            }
+            
+            .evolution-timeline::before {
+                left: 30px;
+            }
+            
+            .evolution-item {
+                justify-content: flex-start;
+                margin-left: 60px;
+            }
+            
+            .evolution-item:nth-child(odd) {
+                flex-direction: row;
+            }
+            
+            .evolution-content {
+                width: calc(100% - 70px);
+            }
+            
+            .evolution-marker {
+                left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--medium-bg);
+                padding: 20px;
+                box-shadow: var(--shadow-heavy);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .main-nav.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero-section {
+                padding-top: 150px;
+            }
+            
+            .game-frame {
+                height: 400px;
+            }
+            
+            .curiosity-content {
+                padding: 30px 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .game-frame {
+                height: 300px;
+            }
+            
+            .curiosity-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .curiosity-tab {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* ===== ANIMAÇÕES ESPECIAIS ===== */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px var(--primary-blue), 0 0 20px var(--primary-blue); }
+            to { box-shadow: 0 0 15px var(--accent-yellow), 0 0 30px var(--accent-yellow); }
+        }
+        
+        /* ===== PROGRESS BAR ===== */
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--gradient-accent);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        /* ===== TOOLTIP ===== */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 250px;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--primary-blue);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+        
+        .badge-accent {
+            background: var(--gradient-accent);
+            color: var(--secondary-blue);
+        }
+        
+        /* ===== LOADING ANIMATION ===== */
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-yellow);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon floating">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">POKÉMON EVOLUTION</div>
+                        <div class="logo-subtext">JOGO COMPLETO ONLINE</div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="main-nav" id="mainNav">
+                    <ul>
+                        <li><a href="#home" class="nav-link active">Início</a></li>
+                        <li><a href="#features" class="nav-link">Recursos</a></li>
+                        <li><a href="#curiosities" class="nav-link">Curiosidades</a></li>
+                        <li><a href="#regions" class="nav-link">Regiões</a></li>
+                        <li><a href="#evolution" class="nav-link">Evolução</a></li>
+                        <li><a href="#gameplay" class="nav-link">Gameplay</a></li>
+                        <li><a href="#download" class="nav-link">Download</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">POKÉMON EVOLUTION</h1>
+                    <h2 class="hero-subtitle">A Nova Era dos Pokémon Chegou!</h2>
+                    <p class="hero-description">
+                        Embarque na aventura definitiva em Pokémon Evolution! Explore novas regiões, capture Pokémon lendários 
+                        e enfrente desafios épicos neste jogo que reinventa a franquia. Com gráficos atualizados, mecânicas 
+                        inovadoras e uma história cativante, prepare-se para a experiência Pokémon mais completa já criada.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#game" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Jogar Agora
+                        </a>
+                        <a href="#curiosities" class="btn btn-accent">
+                            <i class="fas fa-book"></i> Saiba Mais
+                        </a>
+                        <button class="btn btn-primary" id="trailerBtn">
+                            <i class="fas fa-film"></i> Ver Trailer
+                        </button>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Pokémons</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">Regiões</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">80+</div>
+                            <div class="stat-label">Horas de Jogo</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2024</div>
+                            <div class="stat-label">Lançamento</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-game-container">
+                    <div class="game-frame-container">
+                        <iframe class="game-frame" 
+                                src="https://www.retrogames.cc/embed/46912-pokemon-evolved.html" 
+                                frameborder="0" 
+                                allowfullscreen="true" 
+                                webkitallowfullscreen="true" 
+                                mozallowfullscreen="true" 
+                                scrolling="no">
+                        </iframe>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="btn btn-primary" id="fullscreenBtn">
+                            <i class="fas fa-expand"></i> Tela Cheia
+                        </button>
+                        <button class="btn btn-primary" id="soundToggle">
+                            <i class="fas fa-volume-up"></i> Som
+                        </button>
+                        <button class="btn btn-accent" id="saveBtn">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                        <button class="btn btn-primary" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reiniciar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Recursos Exclusivos</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Sistema de Evolução Dinâmico</h3>
+                    <p class="feature-description">
+                        Pokémon agora evoluem com base em múltiplos fatores além do nível, incluindo felicidade, 
+                        ambiente, itens especiais e até mesmo o horário do dia. Descubra novas formas evolutivas nunca vistas antes!
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3 class="feature-title">Mundo Aberto Expansivo</h3>
+                    <p class="feature-description">
+                        Explore 6 regiões interconectadas em um mapa aberto massivo. Viaje de cidade em cidade, 
+                        descubra cavernas secretas, supere desafios ambientais e encontre Pokémon raros em cada canto.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Batalhas Cooperativas</h3>
+                    <p class="feature-description">
+                        Enfrente chefes lendários com amigos em batalhas cooperativas épicas. Coordene estratégias, 
+                        combine ataques e derrote adversários que seriam impossíveis de vencer sozinho.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="feature-title">Gráficos HD Remasterizados</h3>
+                    <p class="feature-description">
+                        Todos os Pokémon, personagens e cenários foram completamente redesenhados em alta definição. 
+                        Desfrute de animações suaves, efeitos visuais impressionantes e uma estética visual moderna.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <h3 class="feature-title">Modo Nuzlocke Integrado</h3>
+                    <p class="feature-description">
+                        Desafie-se com o modo Nuzlocke oficial, onde Pokémon derrotados são considerados mortos permanentemente. 
+                        Configure regras personalizadas para criar sua própria experiência hardcore.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">IA Adaptativa</h3>
+                    <p class="feature-description">
+                        Treinadores e Pokémon selvagens agora possuem inteligência artificial avançada que se adapta 
+                        ao seu estilo de jogo, criando desafios únicos e imprevisíveis a cada partida.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curiosities Section -->
+    <section class="curiosities-section" id="curiosities">
+        <div class="container">
+            <h2 class="section-title">Curiosidades Secretas</h2>
+            
+            <div class="curiosities-container">
+                <div class="curiosity-tabs">
+                    <button class="curiosity-tab active" data-tab="development">Desenvolvimento</button>
+                    <button class="curiosity-tab" data-tab="secrets">Segredos</button>
+                    <button class="curiosity-tab" data-tab="eastereggs">Easter Eggs</button>
+                    <button class="curiosity-tab" data-tab="mechanics">Mecânicas</button>
+                    <button class="curiosity-tab" data-tab="lore">História</button>
+                </div>
+                
+                <div class="curiosity-content">
+                    <!-- Development Tab -->
+                    <div class="curiosity-item active" id="development">
+                        <h3 class="curiosity-title">
+                            <i class="fas fa-code"></i> Detalhes do Desenvolvimento
+                        </h3>
+                        <p class="curiosity-text">
+                            Pokémon Evolution foi desenvolvido por uma equipe de 40 pessoas ao longo de 3 anos, utilizando 
+                            uma engine customizada construída especificamente para este jogo. A equipe inclui ex-funcionários 
+                            da Game Freak e fãs veteranos da franquia.
+                        </p>
+                        <p class="curiosity-text">
+                            O jogo começou como um mod de Pokémon FireRed, mas rapidamente evoluiu para um projeto 
+                            independente quando a equipe percebeu o potencial para criar algo completamente novo. Mais de 
+                            800 sprites foram redesenhados manualmente em resolução 4x maior que os originais.
+                        </p>
+                        
+                        <div class="curiosity-image">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        
+                        <h4>Estatísticas do Desenvolvimento</h4>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%;"></div>
+                        </div>
+                        <p>Tempo de desenvolvimento: 3 anos</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+                        <p>Sprites redesenhados: 850/1000</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 95%;"></div>
+                        </div>
+                        <p>Músicas originais: 152/160</p>
+                    </div>
+                    
+                    <!-- Secrets Tab -->
+                    <div class="curiosity-item" id="secrets">
+                        <h3 class="curiosity-title">
+                            <i class="fas fa-key"></i> Segredos Ocultos
+                        </h3>
+                        <p class="curiosity-text">
+                            Pokémon Evolution está repleto de segredos cuidadosamente escondidos. Existem mais de 50 
+                            Pokémon secretos que só podem ser obtidos através de métodos específicos e complexos.
+                        </p>
+                        <p class="curiosity-text">
+                            Um dos segredos mais bem guardados é o "Templo do Tempo", acessível apenas em uma 
+                            sexta-feira 13 durante uma lua cheia, usando um Celebi no nível 100. Dentro dele, você 
+                            pode encontrar formas alternativas de Pokémon lendários.
+                        </p>
+                        
+                        <div class="curiosity-image">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        
+                        <h4>Segredos Confirmados</h4>
+                        <ul class="gameplay-list">
+                            <li><i class="fas fa-check"></i> Pokémon "Shiny" com cores exclusivas</li>
+                            <li><i class="fas fa-check"></i> Chefes secretos pós-game</li>
+                            <li><i class="fas fa-check"></i> Itens lendários escondidos</li>
+                            <li><i class="fas fa-check"></i> Referências a todos os jogos anteriores</li>
+                            <li><i class="fas fa-check"></i> Final secreto alternativo</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Easter Eggs Tab -->
+                    <div class="curiosity-item" id="eastereggs">
+                        <h3 class="curiosity-title">
+                            <i class="fas fa-egg"></i> Easter Eggs Incríveis
+                        </h3>
+                        <p class="curiosity-text">
+                            Os desenvolvedores adoraram esconder referências e homenagens por todo o jogo. Desde 
+                            personagens nomeados em homenagem a fãs famosos da comunidade até recriações de cenas 
+                            icônicas de animes e mangás.
+                        </p>
+                        <p class="curiosity-text">
+                            Na cidade de Nova Aurora, existe uma casa com um desenvolvedor sentado em sua mesa. 
+                            Se você interagir com ele 100 vezes, ele lhe dará um Mew com um movimento exclusivo. 
+                            Esta é uma homenagem ao glitch do Mew original de Pokémon Red/Blue.
+                        </p>
+                        
+                        <div class="curiosity-image">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        
+                        <h4>Easter Eggs Populares</h4>
+                        <div class="gameplay-card">
+                            <div class="gameplay-body">
+                                <p><strong>Referência ao Anime:</strong> Encontre Ash, Misty e Brock em uma pousada remota.</p>
+                                <p><strong>Homenagem aos Fãs:</strong> NPCs baseados em criadores de conteúdo famosos.</p>
+                                <p><strong>Glitches Intencionais:</strong> Alguns glitches clássicos foram recriados como features.</p>
+                                <p><strong>Quebra da Quarta Parede:</strong> Personagens que sabem que estão em um jogo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mechanics Tab -->
+                    <div class="curiosity-item" id="mechanics">
+                        <h3 class="curiosity-title">
+                            <i class="fas fa-cogs"></i> Mecânicas Escondidas
+                        </h3>
+                        <p class="curiosity-text">
+                            Além dos sistemas principais, Pokémon Evolution possui mecânicas complexas que não são 
+                            explicadas diretamente no jogo. O sistema de amizade, por exemplo, afeta não apenas 
+                            evoluções, mas também a precisão de ataques e a chance de críticos.
+                        </p>
+                        <p class="curiosity-text">
+                            Existe um sistema de clima dinâmico que influencia quais Pokémon aparecem, seus movimentos 
+                            e até mesmo a efetividade de tipos. Em uma tempestade elétrica, ataques do tipo Elétrico 
+                            têm 30% mais de poder, mas também há chance do Pokémon ser atingido por um raio!
+                        </p>
+                        
+                        <div class="curiosity-image">
+                            <i class="fas fa-cloud-sun-rain"></i>
+                        </div>
+                        
+                        <h4>Mecânicas Não Documentadas</h4>
+                        <ul class="gameplay-list">
+                            <li><i class="fas fa-thermometer-half"></i> Sistema de temperatura afeta Pokémon de gelo e fogo</li>
+                            <li><i class="fas fa-moon"></i> Ciclo lunar influencia Pokémon psíquicos e sombrios</li>
+                            <li><i class="fas fa-heart"></i> Amizade afeta estatísticas em batalha</li>
+                            <li><i class="fas fa-utensils"></i> Pokémon podem ganhar buffs ao comer alimentos específicos</li>
+                            <li><i class="fas fa-dna"></i> Sistema de genética para criação de Pokémon</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Lore Tab -->
+                    <div class="curiosity-item" id="lore">
+                        <h3 class="curiosity-title">
+                            <i class="fas fa-scroll"></i> Lore e Mitologia
+                        </h3>
+                        <p class="curiosity-text">
+                            A história de Pokémon Evolution se conecta com todos os jogos anteriores, revelando que 
+                            todas as regiões fazem parte de um mesmo continente. A mitologia criada para este jogo 
+                            explica a origem dos Pokémon e dos próprios treinadores.
+                        </p>
+                        <p class="curiosity-text">
+                            De acordo com a lore, os primeiros humanos eram capazes de se comunicar diretamente com 
+                            os Pokémon, sem a necessidade de Pokébolas. Um evento catastrófico conhecido como "O 
+                            Silenciamento" separou as duas espécies, criando a necessidade dos dispositivos atuais.
+                        </p>
+                        
+                        <div class="curiosity-image">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        
+                        <h4>Conectando a Cronologia Pokémon</h4>
+                        <div class="evolution-timeline">
+                            <div class="evolution-item">
+                                <div class="evolution-marker">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="evolution-content">
+                                    <h4 class="evolution-title">Era da Origem</h4>
+                                    <p class="evolution-description">Criação dos Pokémon lendários e primeiros humanos.</p>
+                                </div>
+                            </div>
+                            <div class="evolution-item">
+                                <div class="evolution-marker">
+                                    <i class="fas fa-volume-mute"></i>
+                                </div>
+                                <div class="evolution-content">
+                                    <h4 class="evolution-title">O Silenciamento</h4>
+                                    <p class="evolution-description">Evento que separou humanos e Pokémon.</p>
+                                </div>
+                            </div>
+                            <div class="evolution-item">
+                                <div class="evolution-marker">
+                                    <i class="fas fa-pokeball"></i>
+                                </div>
+                                <div class="evolution-content">
+                                    <h4 class="evolution-title">Era Moderna</h4>
+                                    <p class="evolution-description">Desenvolvimento das Pokébolas e ligas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regions Section -->
+    <section class="regions-section" id="regions">
+        <div class="container">
+            <h2 class="section-title">Regiões para Explorar</h2>
+            
+            <div class="regions-slider">
+                <div class="region-card">
+                    <div class="region-header">
+                        <h3 class="region-name">AURORA</h3>
+                    </div>
+                    <div class="region-body">
+                        <p class="region-description">
+                            A região inicial, caracterizada por paisagens exuberantes e cidades pitorescas. Lar do 
+                            Professor Carvalho e dos Pokémon iniciais.
+                        </p>
+                        <div class="region-pokemon">
+                            <div class="pokemon-icon">F</div>
+                            <div class="pokemon-icon">A</div>
+                            <div class="pokemon-icon">P</div>
+                        </div>
+                        <p><strong>Pokémon Iniciais:</strong> Flarog (Fogo), Aquleaf (Água), Petrock (Pedra)</p>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-header">
+                        <h3 class="region-name">NEBULA</h3>
+                    </div>
+                    <div class="region-body">
+                        <p class="region-description">
+                            Uma região montanhosa e misteriosa, com cidades construídas nas nuvens e ruínas antigas 
+                            que guardam segredos ancestrais.
+                        </p>
+                        <div class="region-pokemon">
+                            <div class="pokemon-icon">D</div>
+                            <div class="pokemon-icon">S</div>
+                            <div class="pokemon-icon">P</div>
+                        </div>
+                        <p><strong>Lendários:</strong> Drakenir (Dragão), Stormwing (Voador), Pyroclaw (Fogo)</p>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-header">
+                        <h3 class="region-name">CRYSTALIS</h3>
+                    </div>
+                    <div class="region-body">
+                        <p class="region-description">
+                            Uma região gelada com cavernas de cristal brilhante. Lar de Pokémon do tipo Gelo e 
+                            Psíquico, e da Liga Pokémon mais desafiadora.
+                        </p>
+                        <div class="region-pokemon">
+                            <div class="pokemon-icon">G</div>
+                            <div class="pokemon-icon">P</div>
+                            <div class="pokemon-icon">I</div>
+                        </div>
+                        <p><strong>Especialidade:</strong> Pokémon Gelo, Psíquico e de Cristal</p>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-header">
+                        <h3 class="region-name">VOLCANARA</h3>
+                    </div>
+                    <div class="region-body">
+                        <p class="region-description">
+                            Ilhas vulcânicas com ecossistemas únicos. Desde praias tropicais até vulcões ativos, 
+                            esta região é perfeita para Pokémon de Fogo e Terra.
+                        </p>
+                        <div class="region-pokemon">
+                            <div class="pokemon-icon">V</div>
+                            <div class="pokemon-icon">L</div>
+                            <div class="pokemon-icon">M</div>
+                        </div>
+                        <p><strong>Lendário:</strong> Volcanix, o guardião dos vulcões</p>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-header">
+                        <h3 class="region-name">CYBERNET</h3>
+                    </div>
+                    <div class="region-body">
+                        <p class="region-description">
+                            Uma metrópole futurista onde tecnologia e Pokémon se fundem. Lar de Pokémon do tipo 
+                            Aço, Elétrico e formas cibernéticas de espécies clássicas.
+                        </p>
+                        <div class="region-pokemon">
+                            <div class="pokemon-icon">C</div>
+                            <div class="pokemon-icon">R</div>
+                            <div class="pokemon-icon">B</div>
+                        </div>
+                        <p><strong>Exclusivo:</strong> Formas cibernéticas de Pokémon clássicos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evolution Section -->
+    <section class="evolution-section" id="evolution">
+        <div class="container">
+            <h2 class="section-title">Sistema de Evolução</h2>
+            
+            <div class="evolution-timeline">
+                <div class="evolution-item">
+                    <div class="evolution-marker">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="evolution-content">
+                        <h4 class="evolution-title">Evolução por Nível</h4>
+                        <p class="evolution-description">
+                            O método clássico retorna, mas com uma reviravolta: Pokémon agora podem escolher entre 
+                            múltiplas formas evolutivas no momento da evolução, dependendo de suas estatísticas e 
+                            movimentos aprendidos.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-marker">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="evolution-content">
+                        <h4 class="evolution-title">Evolução por Itens</h4>
+                        <p class="evolution-description">
+                            Mais de 50 novos itens evolutivos foram adicionados, cada um com efeitos visuais únicos 
+                            durante a evolução. Alguns itens só podem ser obtidos através de quests complexas ou 
+                            eventos especiais.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-marker">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="evolution-content">
+                        <h4 class="evolution-title">Evolução por Amizade</h4>
+                        <p class="evolution-description">
+                            O sistema de amizade foi completamente reformulado. Agora você pode ver indicadores visuais 
+                            do nível de amizade e atividades específicas aumentam essa estatística de formas diferentes.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-marker">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="evolution-content">
+                        <h4 class="evolution-title">Evoluções Especiais</h4>
+                        <p class="evolution-description">
+                            Novos métodos únicos: evoluir durante certas condições climáticas, em locais específicos, 
+                            após aprender movimentos específicos, ou até mesmo baseado no time que você possui.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-marker">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="evolution-content">
+                        <h4 class="evolution-title">Mega Evolução & Formas</h4>
+                        <p class="evolution-description">
+                            Mega evolução retorna com mais de 30 novas formas. Além disso, Pokémon agora podem ter 
+                            formas regionais, formas alternativas e até mesmo "Evolução Reversa" sob condições especiais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gameplay Section -->
+    <section class="gameplay-section" id="gameplay">
+        <div class="container">
+            <h2 class="section-title">Gameplay e Mecânicas</h2>
+            
+            <div class="gameplay-container">
+                <div class="gameplay-card">
+                    <div class="gameplay-header">
+                        <h3 class="gameplay-title">Batalhas Aprimoradas</h3>
+                    </div>
+                    <div class="gameplay-body">
+                        <ul class="gameplay-list">
+                            <li><i class="fas fa-bolt"></i> Sistema de iniciativa baseado em velocidade real</li>
+                            <li><i class="fas fa-sync-alt"></i> Combos de tipo com bônus de dano</li>
+                            <li><i class="fas fa-users"></i> Batalhas 2v2 e 3v3 integradas</li>
+                            <li><i class="fas fa-chart-line"></i> Estatísticas dinâmicas que mudam durante batalha</li>
+                            <li><i class="fas fa-magic"></i> Efeitos de campo que afetam estratégias</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gameplay-card">
+                    <div class="gameplay-header">
+                        <h3 class="gameplay-title">Exploração</h3>
+                    </div>
+                    <div class="gameplay-body">
+                        <ul class="gameplay-list">
+                            <li><i class="fas fa-mountain"></i> Mundo aberto sem barreiras artificiais</li>
+                            <li><i class="fas fa-water"></i> Sistema de natação, escalada e voo</li>
+                            <li><i class="fas fa-compass"></i> Quests dinâmicas com múltiplos finais</li>
+                            <li><i class="fas fa-search"></i> Segredos e áreas ocultas em cada rota</li>
+                            <li><i class="fas fa-campground"></i> Acampamento para interagir com Pokémon</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gameplay-card">
+                    <div class="gameplay-header">
+                        <h3 class="gameplay-title">Personalização</h3>
+                    </div>
+                    <div class="gameplay-body">
+                        <ul class="gameplay-list">
+                            <li><i class="fas fa-tshirt"></i> Sistema de roupas e aparência detalhado</li>
+                            <li><i class="fas fa-home"></i> Casa personalizável com troféus</li>
+                            <li><i class="fas fa-palette"></i> Pokébolas customizáveis</li>
+                            <li><i class="fas fa-route"></i> Rotas de treinamento personalizadas</li>
+                            <li><i class="fas fa-camera"></i> Modo fotográfico com filtros</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Comece Sua Jornada</h2>
+                <p class="download-description">
+                    Pokémon Evolution está disponível para jogar diretamente no seu navegador ou para download 
+                    em várias plataformas. Junte-se a milhões de treinadores nesta aventura épica!
+                </p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-accent pulse" id="playNowBtn">
+                        <i class="fas fa-play-circle"></i> Jogar no Navegador
+                    </button>
+                    <button class="btn btn-primary" id="downloadModalBtn">
+                        <i class="fas fa-download"></i> Download Completo
+                    </button>
+                </div>
+                
+                <div class="download-options">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-windows"></i>
+                        </div>
+                        <h4 class="download-card-title">Windows</h4>
+                        <p>Versão completa com suporte a mods</p>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <h4 class="download-card-title">Android</h4>
+                        <p>Otimizado para dispositivos móveis</p>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-linux"></i>
+                        </div>
+                        <h4 class="download-card-title">Linux/Mac</h4>
+                        <p>Compatível com sistemas alternativos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pokémon Evolution</h3>
+                    <p>Uma experiência Pokémon criada por fãs, para fãs. Não afiliado à Nintendo ou Game Freak.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-reddit"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Recursos</a></li>
+                        <li><a href="#curiosities"><i class="fas fa-chevron-right"></i> Curiosidades</a></li>
+                        <li><a href="#regions"><i class="fas fa-chevron-right"></i> Regiões</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" id="pokedexBtn"><i class="fas fa-chevron-right"></i> Pokédex Online</a></li>
+                        <li><a href="#" id="forumBtn"><i class="fas fa-chevron-right"></i> Fórum da Comunidade</a></li>
+                        <li><a href="#" id="guideBtn"><i class="fas fa-chevron-right"></i> Guias de Jogo</a></li>
+                        <li><a href="#" id="modsBtn"><i class="fas fa-chevron-right"></i> Mods e Addons</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" id="faqBtn"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#" id="bugBtn"><i class="fas fa-chevron-right"></i> Reportar Bug</a></li>
+                        <li><a href="#" id="suggestionBtn"><i class="fas fa-chevron-right"></i> Sugestões</a></li>
+                        <li><a href="#" id="contactBtn"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>Pokémon Evolution © 2024 - Projeto de Fãs | Pokémon é uma marca registrada da Nintendo</p>
+                <p>Este site não possui afiliação com a Nintendo, Game Freak ou The Pokémon Company.</p>
+                <p>Jogue de forma responsável e apoie os lançamentos oficiais.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="mainModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Título do Modal</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                Conteúdo do modal será inserido aqui.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Código JavaScript extenso para todas as funcionalidades
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos principais
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainHeader = document.getElementById('mainHeader');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const curiosityTabs = document.querySelectorAll('.curiosity-tab');
+            const curiosityItems = document.querySelectorAll('.curiosity-item');
+            const modal = document.getElementById('mainModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Botões de controle do jogo
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const soundToggle = document.getElementById('soundToggle');
+            const saveBtn = document.getElementById('saveBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const trailerBtn = document.getElementById('trailerBtn');
+            const playNowBtn = document.getElementById('playNowBtn');
+            const downloadModalBtn = document.getElementById('downloadModalBtn');
+            
+            // Botões do footer
+            const footerButtons = [
+                'pokedexBtn', 'forumBtn', 'guideBtn', 'modsBtn',
+                'faqBtn', 'bugBtn', 'suggestionBtn', 'contactBtn'
+            ];
+            
+            // ===== NAVEGAÇÃO RESPONSIVA =====
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Fechar menu ao clicar em um link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    // Atualizar link ativo
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
+            
+            // ===== SISTEMA DE TABS DE CURIOSIDADES =====
+            curiosityTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remover active de todas as tabs
+                    curiosityTabs.forEach(t => t.classList.remove('active'));
+                    curiosityItems.forEach(item => item.classList.remove('active'));
+                    
+                    // Adicionar active na tab clicada
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // ===== MODAL SYSTEM =====
+            function openModal(title, content) {
+                modalTitle.textContent = title;
+                modalBody.innerHTML = content;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            modalClose.addEventListener('click', closeModal);
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // ===== CONTROLES DO JOGO =====
+            let soundOn = true;
+            let gameSaved = false;
+            
+            fullscreenBtn.addEventListener('click', function() {
+                const gameFrame = document.querySelector('.game-frame');
+                
+                if (!document.fullscreenElement) {
+                    if (gameFrame.requestFullscreen) {
+                        gameFrame.requestFullscreen();
+                    } else if (gameFrame.webkitRequestFullscreen) {
+                        gameFrame.webkitRequestFullscreen();
+                    } else if (gameFrame.mozRequestFullScreen) {
+                        gameFrame.mozRequestFullScreen();
+                    }
+                    
+                    fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Sair da Tela Cheia';
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    }
+                    
+                    fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Tela Cheia';
+                }
+            });
+            
+            soundToggle.addEventListener('click', function() {
+                soundOn = !soundOn;
+                soundToggle.innerHTML = soundOn 
+                    ? '<i class="fas fa-volume-up"></i> Som' 
+                    : '<i class="fas fa-volume-mute"></i> Som';
+                
+                // Simulação - em um caso real, controlaria o áudio do iframe
+                openModal('Controle de Áudio', 
+                    soundOn 
+                    ? '<p>Áudio do jogo ativado! Ajuste o volume do seu dispositivo para controlar o nível.</p>' 
+                    : '<p>Áudio do jogo desativado. Para reativar, clique novamente no botão de som.</p>');
+            });
+            
+            saveBtn.addEventListener('click', function() {
+                gameSaved = true;
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> Salvo!';
+                saveBtn.classList.add('btn-accent');
+                
+                setTimeout(() => {
+                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar';
+                    saveBtn.classList.remove('btn-accent');
+                }, 2000);
+                
+                openModal('Jogo Salvo', '<p>Seu progresso foi salvo com sucesso! Você pode continuar de onde parou a qualquer momento.</p>');
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Tem certeza que deseja reiniciar o jogo? Todo o progresso não salvo será perdido.')) {
+                    const gameFrame = document.querySelector('.game-frame');
+                    const currentSrc = gameFrame.src;
+                    gameFrame.src = currentSrc;
+                    
+                    resetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reiniciando...';
+                    
+                    setTimeout(() => {
+                        resetBtn.innerHTML = '<i class="fas fa-redo"></i> Reiniciar';
+                        openModal('Jogo Reiniciado', '<p>O jogo foi reiniciado com sucesso. Boa sorte em sua nova jornada!</p>');
+                    }, 1000);
+                }
+            });
+            
+            // ===== BOTÕES PRINCIPAIS =====
+            trailerBtn.addEventListener('click', function() {
+                openModal('Trailer - Pokémon Evolution', `
+                    <div style="text-align: center;">
+                        <div class="curiosity-image" style="height: 200px; margin-bottom: 20px;">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <p>O trailer oficial de Pokémon Evolution será lançado em breve!</p>
+                        <p>Enquanto isso, aproveite para explorar todas as funcionalidades do jogo diretamente no emulador acima.</p>
+                        <p><strong>Data de lançamento do trailer:</strong> 15 de Dezembro de 2024</p>
+                    </div>
+                `);
+            });
+            
+            playNowBtn.addEventListener('click', function() {
+                const gameSection = document.querySelector('.hero-game-container');
+                gameSection.scrollIntoView({ behavior: 'smooth' });
+                
+                openModal('Jogando Pokémon Evolution', `
+                    <p>O jogo já está carregado e pronto para jogar! Role para cima até a seção do emulador e clique no jogo para começar.</p>
+                    <p><strong>Dicas para jogar:</strong></p>
+                    <ul>
+                        <li>Use as setas do teclado para movimentação</li>
+                        <li>Pressione Z para Ação A e X para Ação B</li>
+                        <li>ENTER para Start e SHIFT para Select</li>
+                        <li>Pressione F11 ou use o botão "Tela Cheia" para melhor experiência</li>
+                    </ul>
+                `);
+            });
+            
+            downloadModalBtn.addEventListener('click', function() {
+                openModal('Download Pokémon Evolution', `
+                    <div style="text-align: center;">
+                        <h3>Escolha sua versão:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0;">
+                            <div class="download-card" style="cursor: pointer;" onclick="alert('Download iniciado: Windows Version 2.1.4')">
+                                <div class="download-icon">
+                                    <i class="fab fa-windows"></i>
+                                </div>
+                                <h4>Windows</h4>
+                                <p>1.2 GB</p>
+                            </div>
+                            <div class="download-card" style="cursor: pointer;" onclick="alert('Download iniciado: Android Version 2.1.3')">
+                                <div class="download-icon">
+                                    <i class="fab fa-android"></i>
+                                </div>
+                                <h4>Android</h4>
+                                <p>980 MB</p>
+                            </div>
+                        </div>
+                        <p><strong>Instruções de instalação:</strong></p>
+                        <ol style="text-align: left; margin: 20px;">
+                            <li>Baixe o arquivo correspondente ao seu sistema</li>
+                            <li>Extraia o conteúdo do ZIP</li>
+                            <li>Execute o arquivo "PokemonEvolution.exe" (Windows) ou instale o APK (Android)</li>
+                            <li>Siga as instruções do instalador</li>
+                            <li>Execute o jogo e comece sua aventura!</li>
+                        </ol>
+                    </div>
+                `);
+            });
+            
+            // ===== BOTÕES DO FOOTER =====
+            footerButtons.forEach(btnId => {
+                document.getElementById(btnId).addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const btnText = this.textContent.replace('►', '').trim();
+                    
+                    openModal(btnText, `
+                        <p>Esta funcionalidade está em desenvolvimento e será lançada em breve!</p>
+                        <p>Enquanto isso, você pode continuar aproveitando o jogo Pokémon Evolution diretamente no seu navegador.</p>
+                        <div class="curiosity-image" style="height: 150px; margin-top: 20px;">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                    `);
+                });
+            });
+            
+            // ===== ANIMAÇÕES DINÂMICAS =====
+            // Animar elementos quando entram na viewport
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar todos os cards e seções
+            document.querySelectorAll('.feature-card, .region-card, .gameplay-card, .evolution-content').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // ===== SIMULAÇÃO DE PROGRESSO DINÂMICO =====
+            // Atualizar estatísticas periodicamente
+            function updateStats() {
+                const statValues = document.querySelectorAll('.stat-value');
+                if (statValues[0]) {
+                    const currentVal = parseInt(statValues[0].textContent);
+                    if (currentVal < 200) {
+                        statValues[0].textContent = (currentVal + 1) + '+';
+                    }
+                }
+            }
+            
+            setInterval(updateStats, 10000);
+            
+            // ===== EFEITOS DE INTERAÇÃO ADICIONAIS =====
+            // Efeito de digitação no título
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let charIndex = 0;
+            function typeWriter() {
+                if (charIndex < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            // Iniciar digitação após um breve delay
+            setTimeout(typeWriter, 500);
+            
+            // ===== SIMULAÇÃO DE NOTIFICAÇÃO =====
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 100px;
+                        right: 20px;
+                        background: ${type === 'success' ? 'var(--primary-blue)' : 'var(--accent-red)'};
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 10px;
+                        box-shadow: var(--shadow-heavy);
+                        z-index: 10000;
+                        animation: slideInRight 0.3s ease;
+                    ">
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                        ${message}
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Mostrar notificação de boas-vindas
+            setTimeout(() => {
+                showNotification('Bem-vindo ao Pokémon Evolution! Aproveite o jogo!', 'success');
+            }, 2000);
+            
+            // ===== CONTADOR DE VISITAS SIMULADO =====
+            let visitCount = localStorage.getItem('pokemonEvolutionVisits') || 0;
+            visitCount = parseInt(visitCount) + 1;
+            localStorage.setItem('pokemonEvolutionVisits', visitCount);
+            
+            // Adicionar contador discretamente ao footer
+            const visitCounter = document.createElement('div');
+            visitCounter.style.cssText = `
+                text-align: center;
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+                margin-top: 10px;
+            `;
+            visitCounter.textContent = `Esta página foi visitada ${visitCount} vezes`;
+            document.querySelector('.copyright').appendChild(visitCounter);
+            
+            // ===== SISTEMA DE TEMAS (CLARO/ESCURO) =====
+            const themeToggle = document.createElement('button');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            themeToggle.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                font-size: 1.2rem;
+                cursor: pointer;
+                z-index: 100;
+                box-shadow: var(--shadow-light);
+                transition: var(--transition);
+            `;
+            
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-theme');
+                themeToggle.innerHTML = document.body.classList.contains('light-theme')
+                    ? '<i class="fas fa-sun"></i>'
+                    : '<i class="fas fa-moon"></i>';
+                
+                // Adicionar estilo para tema claro dinamicamente
+                if (!document.querySelector('#lightThemeStyles')) {
+                    const lightThemeStyles = document.createElement('style');
+                    lightThemeStyles.id = 'lightThemeStyles';
+                    lightThemeStyles.textContent = `
+                        body.light-theme {
+                            --dark-bg: #F0F8FF;
+                            --medium-bg: #E0F0FF;
+                            --light-bg: #FFFFFF;
+                            --text-primary: #1A1A2E;
+                            --text-secondary: #4A5568;
+                            --primary-blue: #2C6CB0;
+                            --secondary-blue: #1B4F9E;
+                            --accent-yellow: #FFCB05;
+                        }
+                        
+                        body.light-theme::before {
+                            background: 
+                                radial-gradient(circle at 10% 20%, rgba(44, 108, 176, 0.1) 0%, transparent 20%),
+                                radial-gradient(circle at 90% 80%, rgba(255, 203, 5, 0.05) 0%, transparent 20%),
+                                radial-gradient(circle at 50% 50%, rgba(240, 248, 255, 0.5) 0%, transparent 50%);
+                        }
+                    `;
+                    document.head.appendChild(lightThemeStyles);
+                }
+            });
+            
+            document.body.appendChild(themeToggle);
+            
+            // ===== ANIMAÇÃO DE POKÉBOLA FLUTUANTE =====
+            const floatingPokeball = document.createElement('div');
+            floatingPokeball.innerHTML = '<i class="fas fa-dragon"></i>';
+            floatingPokeball.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--gradient-accent);
+                color: var(--secondary-blue);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                cursor: pointer;
+                z-index: 100;
+                animation: floating 3s ease-in-out infinite;
+                box-shadow: var(--shadow-light);
+            `;
+            
+            floatingPokeball.addEventListener('click', function() {
+                openModal('Pokémon Evolution - Easter Egg', `
+                    <div style="text-align: center;">
+                        <div style="font-size: 4rem; color: var(--accent-yellow); margin: 20px 0;">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <h3>Você encontrou um Easter Egg!</h3>
+                        <p>Parabéns por explorar cada detalhe do site Pokémon Evolution!</p>
+                        <p>Este Easter Egg é uma homenagem à sua curiosidade como treinador Pokémon.</p>
+                        <p><strong>Dica secreta:</strong> No jogo, tente interagir 50 vezes com a estátua na Praça Central de Aurora.</p>
+                    </div>
+                `);
+            });
+            
+            document.body.appendChild(floatingPokeball);
+        });
+        
+        // Adicionar estilos CSS dinâmicos para animações
+        const dynamicStyles = document.createElement('style');
+        dynamicStyles.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            .notification {
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            
+            .light-theme .logo-text {
+                background: linear-gradient(to right, #2C6CB0, #1B4F9E);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        `;
+        document.head.appendChild(dynamicStyles);
+    </script>
+</body>
+</html>
