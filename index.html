@@ -23,6 +23,9 @@
             --text-gray: #b0b0d0;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --card-radius: 20px;
+            --glass-bg: rgba(21, 21, 48, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -104,17 +107,16 @@
             50% { opacity: 0.5; }
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER GLASS ===== */
         header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, rgba(21, 21, 48, 0.95) 100%);
-            padding: 1.2rem 2.5rem;
+            background: rgba(21, 21, 48, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 1rem 2.5rem;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--accent-blue);
-            box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: var(--transition);
         }
 
@@ -122,27 +124,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .logo-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--accent-blue);
-            filter: drop-shadow(0 0 10px var(--accent-blue));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            filter: drop-shadow(0 0 15px rgba(74, 107, 255, 0.5));
         }
 
         .logo-text {
@@ -151,23 +152,23 @@
         }
 
         .logo h1 {
-            font-size: 2.4rem;
+            font-size: 2rem;
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
         }
 
         .logo p {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-gray);
             letter-spacing: 2px;
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
+            align-items: center;
         }
 
         .nav-link {
@@ -175,43 +176,27 @@
             text-decoration: none;
             font-weight: 600;
             padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 50px;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 1.5px;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--accent-blue);
-            transition: width 0.4s ease;
-        }
-
-        .nav-link:hover::before {
-            width: 100%;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
         }
 
         .nav-link:hover {
-            color: var(--accent-blue);
-            transform: translateY(-3px);
+            background: rgba(74, 107, 255, 0.2);
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
         }
 
         .nav-link.active {
-            background: rgba(74, 107, 255, 0.15);
+            background: rgba(74, 107, 255, 0.3);
             color: var(--accent-blue);
-            border: 1px solid rgba(74, 107, 255, 0.3);
-        }
-
-        .nav-link.active::before {
-            width: 100%;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
         }
 
         .menu-toggle {
@@ -220,17 +205,21 @@
             color: var(--text-light);
             cursor: pointer;
             transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .menu-toggle:hover {
             color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* ===== MAIN CONTAINER ===== */
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 7rem 2.5rem 3rem;
+            padding: 6rem 2.5rem 3rem;
         }
 
         /* ===== HERO SECTION ===== */
@@ -238,9 +227,10 @@
             text-align: center;
             padding: 4rem 2rem;
             margin-bottom: 4rem;
-            background: linear-gradient(135deg, rgba(21, 21, 48, 0.8) 0%, rgba(10, 10, 22, 0.9) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(74, 107, 255, 0.3);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -253,131 +243,175 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(74, 107, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(255, 58, 58, 0.1) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
-            z-index: -1;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(74, 107, 255, 0.1) 50%, 
+                transparent 70%);
+            animation: shine 3s infinite linear;
+            z-index: 1;
         }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h2 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             margin-bottom: 1.5rem;
-            color: var(--accent-blue);
-            text-shadow: 0 0 20px rgba(74, 107, 255, 0.5);
-            animation: fadeInDown 1s ease;
+            color: var(--text-light);
+            text-shadow: 0 0 30px rgba(74, 107, 255, 0.5);
+        }
+
+        .hero h2 .highlight {
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 900;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            max-width: 900px;
+            font-size: 1.2rem;
+            max-width: 800px;
             margin: 0 auto 3rem;
             color: var(--text-gray);
-            animation: fadeInUp 1s ease 0.3s both;
+            line-height: 1.8;
         }
 
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            animation: fadeInUp 1s ease 0.6s both;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .btn {
             padding: 1.2rem 2.5rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: var(--transition);
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             position: relative;
             overflow: hidden;
         }
 
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
         .btn-primary {
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             color: white;
-            box-shadow: 0 10px 20px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(74, 107, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(74, 107, 255, 0.5);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-light);
-            border: 2px solid rgba(74, 107, 255, 0.5);
+            border: 2px solid rgba(74, 107, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             background: rgba(74, 107, 255, 0.2);
             transform: translateY(-5px);
             border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.2);
         }
 
-        /* ===== GAME GRID ===== */
+        /* ===== GAME GRID MODERN ===== */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+        }
+
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
             margin-bottom: 4rem;
         }
 
         .game-card {
-            background: linear-gradient(145deg, rgba(21, 21, 48, 0.9), rgba(10, 10, 22, 0.9));
-            border-radius: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--card-radius);
             overflow: hidden;
             transition: var(--transition);
-            border: 2px solid rgba(74, 107, 255, 0.2);
+            border: 1px solid var(--glass-border);
             position: relative;
             cursor: pointer;
-            height: 420px;
+            height: 450px;
             display: flex;
             flex-direction: column;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(74, 107, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-
-        .game-card:hover::before {
-            transform: translateX(100%);
+            box-shadow: var(--shadow);
         }
 
         .game-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(74, 107, 255, 0.4);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             border-color: var(--accent-blue);
         }
 
+        .game-card:hover .game-thumbnail {
+            transform: scale(1.05);
+        }
+
         .game-thumbnail {
-            height: 200px;
+            height: 220px;
             width: 100%;
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
+            transition: transform 0.6s ease;
         }
 
         .game-thumbnail::after {
@@ -386,33 +420,35 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 60%;
-            background: linear-gradient(to top, rgba(10, 10, 22, 0.95), transparent);
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 10, 22, 0.9) 0%, transparent 50%);
         }
 
         .game-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: var(--accent-red);
+            background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 0.4rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: bold;
             z-index: 2;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .game-info {
-            padding: 1.8rem;
+            padding: 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
         .game-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin-bottom: 0.8rem;
             color: var(--text-light);
             display: flex;
@@ -421,13 +457,14 @@
         }
 
         .game-icon {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         .game-description {
             color: var(--text-gray);
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
+            line-height: 1.6;
             flex-grow: 1;
         }
 
@@ -440,22 +477,22 @@
 
         .game-genre {
             display: flex;
-            gap: 0.7rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .genre-tag {
-            background: rgba(74, 107, 255, 0.2);
+            background: rgba(74, 107, 255, 0.15);
             color: var(--accent-blue);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
             font-weight: 600;
-            border: 1px solid rgba(74, 107, 255, 0.3);
+            border: 1px solid rgba(74, 107, 255, 0.2);
         }
 
         .play-btn {
-            background: var(--accent-blue);
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             color: white;
             border: none;
             width: 45px;
@@ -471,8 +508,8 @@
         }
 
         .play-btn:hover {
-            background: var(--accent-purple);
             transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 20px rgba(74, 107, 255, 0.5);
         }
 
         /* ===== GAME PAGES ===== */
@@ -496,26 +533,16 @@
             align-items: center;
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 3px solid;
+            border-bottom: 2px solid var(--glass-border);
             position: relative;
-        }
-
-        .game-header::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background: currentColor;
         }
 
         .back-btn {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-light);
-            border: 2px solid;
+            border: 2px solid var(--glass-border);
             padding: 1rem 2rem;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
@@ -530,6 +557,7 @@
         .back-btn:hover {
             transform: translateX(-10px);
             background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-blue);
         }
 
         .game-content {
@@ -547,11 +575,12 @@
 
         .game-frame-container {
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
+            border-radius: var(--card-radius);
             padding: 20px;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .game-frame {
@@ -559,10 +588,10 @@
             height: 550px;
             border-radius: 10px;
             overflow: hidden;
-            border: 3px solid;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--glass-border);
             position: relative;
             z-index: 2;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         .game-frame iframe {
@@ -572,18 +601,18 @@
         }
 
         .game-details {
-            background: rgba(21, 21, 48, 0.7);
-            border-radius: 15px;
-            padding: 2.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+            border: 1px solid var(--glass-border);
             box-shadow: var(--shadow);
         }
 
         .game-page-title {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
         }
 
         .game-page-description {
@@ -601,18 +630,23 @@
         }
 
         .info-item {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             padding: 1.2rem;
-            border-radius: 10px;
-            border-left: 4px solid;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .info-item h4 {
-            color: var(--text-light);
+            color: var(--text-gray);
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            letter-spacing: 1px;
         }
 
         .info-item p {
@@ -622,11 +656,11 @@
         }
 
         .controls {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.2);
             padding: 2rem;
-            border-radius: 12px;
+            border-radius: 15px;
             margin-top: 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
         }
 
         .controls h3 {
@@ -647,28 +681,34 @@
         .control-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: var(--transition);
+        }
+
+        .control-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
 
         .key {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
             color: var(--text-light);
             padding: 0.5rem 1rem;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             min-width: 60px;
             text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .key-description {
             color: var(--text-gray);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         /* ===== THEME BACKGROUNDS ===== */
@@ -677,9 +717,7 @@
             background-color: #1a0000;
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 20%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,10 C30,10 20,30 20,50 C20,70 30,90 50,90 C70,90 80,70 80,50 C80,30 70,10 50,10 Z M45,35 C45,30 50,25 55,25 C60,25 65,30 65,35 C65,40 60,45 55,45 C50,45 45,40 45,35 Z M35,35 C35,30 30,25 25,25 C20,25 15,30 15,35 C15,40 20,45 25,45 C30,45 35,40 35,35 Z" fill="none" stroke="rgba(255,0,0,0.1)" stroke-width="2"/></svg>');
-            background-size: cover, cover, 200px;
+                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 20%);
         }
 
         .mk-theme .game-header {
@@ -693,7 +731,7 @@
 
         .mk-theme .game-frame {
             border-color: var(--accent-red);
-            box-shadow: 0 0 30px rgba(255, 58, 58, 0.5);
+            box-shadow: 0 0 30px rgba(255, 58, 58, 0.3);
         }
 
         .mk-theme .info-item {
@@ -710,8 +748,7 @@
             background-color: #87CEEB;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 30%),
-                radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.7) 0%, transparent 30%);
+                radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 30%);
             position: relative;
             overflow: hidden;
         }
@@ -723,7 +760,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><path d="M50,50 C70,30 90,40 110,30 C130,20 150,30 170,40 C190,50 180,60 160,50 C140,40 120,50 100,60 C80,70 60,60 40,50 C20,40 30,70 50,50 Z" fill="rgba(255,255,255,0.3)"/><path d="M20,70 C40,50 60,60 80,50 C100,40 120,50 140,60 C160,70 150,80 130,70 C110,60 90,70 70,80 C50,90 30,80 10,70 C-10,60 0,90 20,70 Z" fill="rgba(255,255,255,0.2)"/></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><path d="M50,50 C70,30 90,40 110,30 C130,20 150,30 170,40 C190,50 180,60 160,50 C140,40 120,50 100,60 C80,70 60,60 40,50 C20,40 30,70 50,50 Z" fill="rgba(255,255,255,0.3)"/></svg>');
             background-size: 400px 200px;
             animation: cloudsMove 60s linear infinite;
             opacity: 0.6;
@@ -746,7 +783,7 @@
 
         .pokemon-theme .game-frame {
             border-color: var(--accent-yellow);
-            box-shadow: 0 0 30px rgba(255, 216, 58, 0.5);
+            box-shadow: 0 0 30px rgba(255, 216, 58, 0.3);
         }
 
         .pokemon-theme .info-item {
@@ -777,29 +814,6 @@
             position: relative;
         }
 
-        .ctr-theme::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(90deg, #888 0%, #aaa 10%, #888 20%, #aaa 30%, #888 40%, #aaa 50%, #888 60%, #aaa 70%, #888 80%, #aaa 90%, #888 100%);
-            background-size: 200% 100%;
-            animation: roadMove 3s linear infinite;
-            height: 100px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.8;
-            mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-        }
-
-        @keyframes roadMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 200px 0; }
-        }
-
         .ctr-theme .game-header {
             border-bottom-color: #ff4500;
         }
@@ -811,7 +825,7 @@
 
         .ctr-theme .game-frame {
             border-color: #ff4500;
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.3);
         }
 
         .ctr-theme .info-item {
@@ -830,21 +844,6 @@
                 radial-gradient(circle at 10% 90%, rgba(107, 142, 35, 0.3) 0%, transparent 30%),
                 radial-gradient(circle at 90% 10%, rgba(34, 139, 34, 0.3) 0%, transparent 30%),
                 radial-gradient(circle at 50% 50%, rgba(85, 107, 47, 0.2) 0%, transparent 40%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .crash-theme::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            background: 
-                radial-gradient(ellipse at 20% 100%, #8b4513 0%, transparent 70%),
-                radial-gradient(ellipse at 50% 100%, #654321 0%, transparent 70%),
-                radial-gradient(ellipse at 80% 100%, #a0522d 0%, transparent 70%);
         }
 
         .crash-theme .game-header {
@@ -858,7 +857,7 @@
 
         .crash-theme .game-frame {
             border-color: #ff8c00;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
         }
 
         .crash-theme .info-item {
@@ -876,22 +875,6 @@
             background-image: 
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
                 repeating-conic-gradient(from 0deg, transparent 0deg 10deg, rgba(255, 255, 255, 0.05) 10deg 20deg);
-            position: relative;
-        }
-
-        .smash-theme::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 60%;
-            border: 8px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 
-                inset 0 0 100px rgba(255, 255, 255, 0.1),
-                0 0 100px rgba(255, 255, 255, 0.1);
         }
 
         .smash-theme .game-header {
@@ -905,7 +888,7 @@
 
         .smash-theme .game-frame {
             border-color: #9a4aff;
-            box-shadow: 0 0 30px rgba(154, 74, 255, 0.5);
+            box-shadow: 0 0 30px rgba(154, 74, 255, 0.3);
         }
 
         .smash-theme .info-item {
@@ -922,8 +905,7 @@
             background-color: #000033;
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.3) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(255, 69, 0, 0.3) 0%, transparent 20%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.8)"/><circle cx="60" cy="40" r="1" fill="rgba(255,255,255,0.6)"/><circle cx="80" cy="70" r="1.5" fill="rgba(255,255,255,0.7)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.6)"/><circle cx="10" cy="50" r="1.2" fill="rgba(255,255,255,0.7)"/></svg>');
+                radial-gradient(circle at 80% 70%, rgba(255, 69, 0, 0.3) 0%, transparent 20%);
         }
 
         .dbz-theme .game-header {
@@ -937,7 +919,7 @@
 
         .dbz-theme .game-frame {
             border-color: #ff8c00;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
         }
 
         .dbz-theme .info-item {
@@ -949,33 +931,121 @@
             color: #ff8c00;
         }
 
+        /* Metal Slug - Militar */
+        .metal-slug-theme {
+            background-color: #2a4a2a;
+            background-image: 
+                linear-gradient(45deg, #1a3a1a 25%, transparent 25%),
+                linear-gradient(-45deg, #1a3a1a 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #1a3a1a 75%),
+                linear-gradient(-45deg, transparent 75%, #1a3a1a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .metal-slug-theme .game-header {
+            border-bottom-color: #8b4513;
+        }
+
+        .metal-slug-theme .back-btn {
+            border-color: #8b4513;
+            color: #8b4513;
+        }
+
+        .metal-slug-theme .game-frame {
+            border-color: #8b4513;
+            box-shadow: 0 0 30px rgba(139, 69, 19, 0.3);
+        }
+
+        .metal-slug-theme .info-item {
+            border-left-color: #8b4513;
+        }
+
+        .metal-slug-theme .key {
+            border-color: #8b4513;
+            color: #8b4513;
+        }
+
+        /* Metal Gear - Stealth */
+        .metal-gear-theme {
+            background-color: #1a1a2a;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.1) 2px, rgba(0, 255, 0, 0.1) 4px);
+        }
+
+        .metal-gear-theme .game-header {
+            border-bottom-color: #00ff00;
+        }
+
+        .metal-gear-theme .back-btn {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .metal-gear-theme .game-frame {
+            border-color: #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .metal-gear-theme .info-item {
+            border-left-color: #00ff00;
+        }
+
+        .metal-gear-theme .key {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        /* Mario Kart - Colorido */
+        .mario-kart-theme {
+            background: linear-gradient(135deg, #ff3366, #33ccff, #ffcc00);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .mario-kart-theme .game-header {
+            border-bottom-color: #ff3366;
+        }
+
+        .mario-kart-theme .back-btn {
+            border-color: #ff3366;
+            color: #ff3366;
+        }
+
+        .mario-kart-theme .game-frame {
+            border-color: #ff3366;
+            box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
+        }
+
+        .mario-kart-theme .info-item {
+            border-left-color: #ff3366;
+        }
+
+        .mario-kart-theme .key {
+            border-color: #ff3366;
+            color: #ff3366;
+        }
+
         /* ===== FOOTER ===== */
         footer {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            background: rgba(21, 21, 48, 0.9);
+            backdrop-filter: blur(15px);
             padding: 3rem 2.5rem 2rem;
             margin-top: 4rem;
-            border-top: 3px solid var(--accent-blue);
+            border-top: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
         }
 
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="rgba(74,107,255,0.1)" stroke-width="1"/></svg>');
-            background-size: 50px;
-            opacity: 0.5;
-        }
-
         .footer-content {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
         }
 
         .footer-grid {
@@ -1039,8 +1109,9 @@
 
         .social-links {
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -1054,7 +1125,7 @@
             color: var(--text-light);
             font-size: 1.2rem;
             transition: var(--transition);
-            border: 2px solid transparent;
+            border: 1px solid transparent;
         }
 
         .social-link:hover {
@@ -1062,6 +1133,7 @@
             transform: translateY(-5px);
             border-color: var(--accent-blue);
             color: white;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
         }
 
         .copyright {
@@ -1070,36 +1142,42 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-gray);
             font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .game-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             }
             
             .hero h2 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 6rem 2rem 2rem;
             }
         }
 
         @media (max-width: 992px) {
-            .header-container {
-                flex-wrap: wrap;
-            }
-            
             .nav-menu {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                margin-top: 1.5rem;
-                display: none;
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 70px);
+                background: rgba(21, 21, 48, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                transition: right 0.4s ease;
+                border-left: 1px solid var(--glass-border);
+                z-index: 999;
             }
             
             .nav-menu.active {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
+                right: 0;
             }
             
             .menu-toggle {
@@ -1107,7 +1185,7 @@
             }
             
             .hero h2 {
-                font-size: 2.3rem;
+                font-size: 2rem;
             }
             
             .hero-buttons {
@@ -1118,13 +1196,20 @@
             .btn {
                 width: 100%;
                 max-width: 300px;
-                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 6rem 1.5rem 2rem;
+                padding: 5rem 1.5rem 2rem;
+            }
+            
+            header {
+                padding: 1rem 1.5rem;
             }
             
             .game-grid {
@@ -1152,11 +1237,11 @@
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
-            header {
-                padding: 1rem 1.5rem;
+            .game-page-title {
+                font-size: 2rem;
             }
         }
 
@@ -1203,6 +1288,70 @@
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ===== FILTERS AND SEARCH ===== */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(74, 107, 255, 0.2);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
         }
     </style>
 </head>
@@ -1252,21 +1401,23 @@
     <div class="container">
         <!-- Home Page -->
         <div id="home-page" class="page active-page">
-            <div class="hero animate-on-scroll">
-                <h2>BEM-VINDO AO UNIVERSO RETRÔ</h2>
-                <p>Descubra e jogue os maiores clássicos dos videogames diretamente no seu navegador. Cada jogo vem com sua própria página temática, controles otimizados e informações detalhadas para uma experiência imersiva completa.</p>
-                
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="showPage('games')">
-                        <i class="fas fa-play-circle"></i> EXPLORAR JOGOS
-                    </button>
-                    <button class="btn btn-secondary" onclick="scrollToFeatured()">
-                        <i class="fas fa-star"></i> JOGOS EM DESTAQUE
-                    </button>
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>BEM-VINDO AO <span class="highlight">RETROGAMEHUB</span></h2>
+                    <p>Reviva os maiores clássicos dos videogames diretamente no seu navegador. Cada jogo vem com sua própria página temática, controles otimizados e informações detalhadas para uma experiência imersiva completa.</p>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showPage('games')">
+                            <i class="fas fa-play-circle"></i> EXPLORAR JOGOS
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToFeatured()">
+                            <i class="fas fa-star"></i> JOGOS EM DESTAQUE
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <h2 class="text-center mb-3 animate-on-scroll">COLECÃO PREMIUM</h2>
+            <h2 class="section-title mb-4">JOGOS EM DESTAQUE</h2>
             
             <div class="game-grid" id="game-cards-container">
                 <!-- Game cards will be generated by JavaScript -->
@@ -1302,6 +1453,21 @@
                 <button class="back-btn" onclick="showPage('home')">
                     <i class="fas fa-arrow-left"></i> VOLTAR
                 </button>
+            </div>
+            
+            <div class="filters">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="gameSearch" placeholder="Buscar jogos..." onkeyup="filterGames()">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterByGenre('all')">Todos</button>
+                    <button class="filter-btn" onclick="filterByGenre('luta')">Luta</button>
+                    <button class="filter-btn" onclick="filterByGenre('rpg')">RPG</button>
+                    <button class="filter-btn" onclick="filterByGenre('corrida')">Corrida</button>
+                    <button class="filter-btn" onclick="filterByGenre('plataforma')">Plataforma</button>
+                    <button class="filter-btn" onclick="filterByGenre('acao')">Ação</button>
+                </div>
             </div>
             
             <div class="game-grid" id="all-games-container">
@@ -1943,6 +2109,526 @@
             </div>
         </div>
 
+        <!-- Mario Kart 64 Page -->
+        <div id="mariokart-page" class="game-page mario-kart-theme">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-flag-checkered"></i> MARIO KART 64 AMPED UP</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">N64 MOD</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/46910-mario-kart-64-amped-up-v3-20.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Direção / Movimentação</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Acelerar (A Button)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Frear / Ré (B Button)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Pular / Drift (R Button)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Usar Item (L Button)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Turbo (Drift Perfeito)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Mario Kart 64 Amped Up é um mod revolucionário que transforma o clássico de 1996 em uma experiência completamente nova. Com novas pistas, personagens, itens e mecânicas, este mod mantém a essência do jogo original enquanto adiciona conteúdo moderno e desafios inéditos.
+                    </p>
+                    <p class="game-page-description">
+                        O mod inclui mais de 50 novas pistas cuidadosamente projetadas, novos personagens como Waluigi e Daisy, itens exclusivos e um sistema de drift aprimorado. Todas as pistas originais foram remasterizadas com melhorias visuais, enquanto as novas pistas trazem designs criativos que vão desde recriações de outros jogos da Nintendo até circuitos completamente originais.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> VERSÃO MOD</h4>
+                            <p>v3.20 (2023)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA BASE</h4>
+                            <p>Nintendo 64</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Kart Racing / Party Game</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> JOGADORES</h4>
+                            <p>1-4 jogadores</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-route"></i> PISTAS</h4>
+                            <p>50+ pistas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-user-friends"></i> PERSONAGENS</h4>
+                            <p>12+ personagens</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> NOVIDADES DO MOD</h3>
+                        <p class="game-page-description">
+                            • <strong>Novas Pistas:</strong> Mais de 50 pistas inéditas<br>
+                            • <strong>Personagens:</strong> Waluigi, Daisy, Birdo, e mais<br>
+                            • <strong>Itens Exclusivos:</strong> Novo sistema de power-ups<br>
+                            • <strong>Gráficos:</strong> Texturas melhoradas e efeitos visuais<br>
+                            • <strong>Balanceamento:</strong> Personagens rebalanceados<br>
+                            • <strong>Modos de Jogo:</strong> Novos modos e desafios<br>
+                            • <strong>Compatibilidade:</strong> Funciona com emuladores e N64 original
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metal Slug Page -->
+        <div id="metalslug-page" class="game-page metal-slug-theme">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-gun"></i> METAL SLUG</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">ARCADE</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/9157-metal-slug-super-vehicle-001.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação / Mira</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Atirar (Fire)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Pular (Jump)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Granada (Bomb)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Entrar/Sair Veículo</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Insert Coin (Ficha)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Metal Slug é um clássico dos run-and-gun que definiu o gênero nos arcades. Lançado em 1996 pela SNK, este jogo combina ação frenética com um estilo de animação desenhado à mão que permanece impressionante até hoje. Os jogadores controlam Marco Rossi ou Tarma Roving em uma missão para deter o General Morden e seu exército rebelde.
+                    </p>
+                    <p class="game-page-description">
+                        Com seu senso de humor único, animação fluida, variedade de armas e veículos destrutíveis (os famosos "Metal Slugs"), o jogo oferece uma experiência co-op inesquecível. Cada fase é repleta de segredos, prisioneiros para resgatar e chefes épicos que testam os reflexos dos jogadores.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>Abril de 1996</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>Arcade (Neo Geo MVS)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Run and Gun / Ação</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>SNK / Nazca Corporation</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> JOGADORES</h4>
+                            <p>1-2 jogadores (co-op)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-skull"></i> DIFICULDADE</h4>
+                            <p>Alta (Arcade)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> DICAS E ESTRATÉGIAS</h3>
+                        <p class="game-page-description">
+                            • <strong>Prisioneiros:</strong> Resgate todos para power-ups extras<br>
+                            • <strong>Armas:</strong> Heavy Machine Gun e Rocket Launcher são as melhores<br>
+                            • <strong>Veículos:</strong> Metal Slug tem HP limitado, use com sabedoria<br>
+                            • <strong>Granadas:</strong> Use para limpar grupos de inimigos<br>
+                            • <strong>Chefes:</strong> Ataque os pontos fracos (geralmente vermelhos)<br>
+                            • <strong>Vidas:</strong> Continue system é generoso, mas tente não morrer<br>
+                            • <strong>Co-op:</strong> Trabalhem juntos para sobreviver
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metal Gear Page -->
+        <div id="metalgear-page" class="game-page metal-gear-theme">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR (MSX)</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">MSX</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/21559-metal-gear-japan.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Atirar (Fire)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Abrir Porta / Usar Item</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Alternar Arma</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Alternar Item</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Codec / Rádio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Metal Gear (1987) é o jogo que criou o gênero stealth action e deu início à lendária série de Hideo Kojima. Originalmente lançado para o MSX2, o jogo apresenta Solid Snake em sua primeira missão para infiltrar-se na fortaleza Outer Heaven e destruir o super-arma "Metal Gear".
+                    </p>
+                    <p class="game-page-description">
+                        Diferente dos jogos de ação convencionais da época, Metal Gear incentiva os jogadores a evitar combates diretos, usar disfarces, se esconder em caixas e coletar itens para progressão. A narrativa complexa, reviravoltas surpreendentes e temas políticos já estavam presentes neste primeiro capítulo, estabelecendo o tom para toda a série.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>Julho de 1987</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>MSX2 / MSX</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Stealth / Ação / Infiltração</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>Konami / Hideo Kojima</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> PROTAGONISTA</h4>
+                            <p>Solid Snake</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-brain"></i> DIFICULDADE</h4>
+                            <p>Média-Alta</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> DICAS DE INFILTRAÇÃO</h3>
+                        <p class="game-page-description">
+                            • <strong>Stealth:</strong> Evite confrontos diretos sempre que possível<br>
+                            • <strong>Caixas:</strong> Use para se esconder e passar por inimigos<br>
+                            • <strong>Rádio:</strong> Use frequentemente para dicas e história<br>
+                            • <strong>Itens:</strong> Coletar itens é essencial para progressão<br>
+                            • <strong>Mapa:</strong> Explore completamente cada área<br>
+                            • <strong>Inimigos:</strong> Patrulhas têm padrões previsíveis<br>
+                            • <strong>Chefes:</strong> Cada chefe tem uma fraqueza específica
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metal Gear 2 Page -->
+        <div id="metalgear2-page" class="game-page metal-gear-theme">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR 2: SOLID SNAKE</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">MSX</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/41429-metal-gear-2-solid-snake.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Atirar (Fire)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Interagir / Usar Item</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Alternar Arma</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Alternar Item</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Codec / Rádio</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">C</div>
+                                <div class="key-description">Agachar (Crouch)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Metal Gear 2: Solid Snake (1990) é uma enorme evolução sobre o original e estabeleceu praticamente todos os elementos que definiram a série. Com gráficos aprimorados, jogabilidade mais refinada e uma história muito mais complexa, este jogo é considerado por muitos fãs como o verdadeiro precursor de Metal Gear Solid.
+                    </p>
+                    <p class="game-page-description">
+                        O jogo introduziu mecânicas essenciais como rastreamento por radar, agachamento, perseguição visual dos inimigos, e um sistema de stealth muito mais profundo. A narrativa apresenta temas ambientais, dilemas morais e personagens memoráveis como Gray Fox e Dr. Madnar, estabelecendo a profundidade filosófica que tornaria a série famosa.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>Julho de 1990</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>MSX2</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Stealth / Ação Tática</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>Konami / Hideo Kojima</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-map"></i> TAMANHO</h4>
+                            <p>2x maior que o original</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-star"></i> INOVAÇÕES</h4>
+                            <p>Radar, agachar, alertas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> MECÂNICAS AVANÇADAS</h3>
+                        <p class="game-page-description">
+                            • <strong>Radar:</strong> Monitora movimento dos inimigos<br>
+                            • <strong>Agachar:</strong> Reduz chance de detecção<br>
+                            • <strong>Alertas:</strong> Inimigos ficam em estado de alerta<br>
+                            • <strong>Patrulhas:</strong> Inimigos têm rotas mais complexas<br>
+                            • <strong>Interação:</strong> Mais opções de diálogo com NPCs<br>
+                            • <strong>Chefes:</strong> Cada chefe requer estratégia única<br>
+                            • <strong>História:</strong> Codec conversations são essenciais<br>
+                            • <strong>Itens:</strong> Sistema de inventário expandido
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metal Gear Solid Page -->
+        <div id="metalgearsolid-page" class="game-page metal-gear-theme">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR SOLID</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">PS1</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/43266-metal-gear-solid-disc-1.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Atirar (Square)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Ação (X Button)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Primeira Pessoa (Triangle)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Inventário (Select)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Codec (L1)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">C</div>
+                                <div class="key-description">Agachar (R1)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Metal Gear Solid (1998) revolucionou a indústria dos games ao combinar cinematografia hollywoodiana com jogabilidade de stealth profunda. Considerado um dos maiores jogos de todos os tempos, MGS elevou o videogame como meio narrativo, apresentando temas complexos, personagens memoráveis e uma experiência imersiva sem precedentes.
+                    </p>
+                    <p class="game-page-description">
+                        Com sua direção cinematográfica, dublagem premiada, trilha sonora épica e mecânicas de jogo inovadoras, Metal Gear Solid definiu o padrão para jogos de stealth. A história segue Solid Snake em sua missão para neutralizar a unidade de forças especiais FOXHOUND que tomou controle de uma instalação nuclear no Alasca, ameaçando lançar um ataque nuclear.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>Setembro de 1998</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>PlayStation 1</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Stealth / Ação Tática / Cinematográfico</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>Konami / Hideo Kojima</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-award"></i> PRÊMIOS</h4>
+                            <p>Jogo do Ano 1998</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-clock"></i> DURAÇÃO</h4>
+                            <p>15-20 horas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> ESTRATÉGIAS ESSENCIAIS</h3>
+                        <p class="game-page-description">
+                            • <strong>Stealth:</strong> Use as sombras e evite linha de visão<br>
+                            • <strong>Radar:</strong> Sempre verifique o solido no canto superior<br>
+                            • <strong>Codec:</strong> Ligue frequentemente para dicas<br>
+                            • <strong>Chefes:</strong> Cada chefe tem padrão único (Psycho Mantis requer troca de porta)<br>
+                            • <strong>Itens:</strong> Cigarro, Binóculo e Card Keys são essenciais<br>
+                            • <strong>Pacifista:</strong> É possível completar sem matar ninguém<br>
+                            • <strong>Segredos:</strong> Muitos easter eggs e referências<br>
+                            • <strong>NG+:</strong> Novos itens disponíveis na segunda jogatina
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- About Page -->
         <div id="about-page" class="page">
             <div class="game-header">
@@ -2175,7 +2861,8 @@
                 theme: "mk-theme",
                 year: "1995",
                 players: "1-2",
-                difficulty: "Alta"
+                difficulty: "Alta",
+                image: "MK3.jpeg"
             },
             {
                 id: "pokemon",
@@ -2187,7 +2874,8 @@
                 theme: "pokemon-theme",
                 year: "2022",
                 players: "1",
-                difficulty: "Média"
+                difficulty: "Média",
+                image: "pokemon_evolved.jpeg"
             },
             {
                 id: "smash",
@@ -2199,7 +2887,8 @@
                 theme: "smash-theme",
                 year: "1999",
                 players: "1-4",
-                difficulty: "Média"
+                difficulty: "Média",
+                image: "smash.jpeg"
             },
             {
                 id: "ctr",
@@ -2211,7 +2900,8 @@
                 theme: "ctr-theme",
                 year: "1999",
                 players: "1-4",
-                difficulty: "Alta"
+                difficulty: "Alta",
+                image: "racing.jpeg"
             },
             {
                 id: "crash",
@@ -2223,7 +2913,8 @@
                 theme: "crash-theme",
                 year: "1996",
                 players: "1",
-                difficulty: "Muito Alta"
+                difficulty: "Muito Alta",
+                image: "crash.jpeg"
             },
             {
                 id: "dbz",
@@ -2235,19 +2926,78 @@
                 theme: "dbz-theme",
                 year: "2004",
                 players: "1-2",
-                difficulty: "Média"
+                difficulty: "Média",
+                image: "Dragon_Ball.jpeg"
+            },
+            {
+                id: "mariokart",
+                title: "Mario Kart 64 Amped Up",
+                description: "Mod completo com novas pistas, personagens e itens para o clássico de corrida.",
+                genre: ["Corrida", "Kart", "Mod"],
+                icon: "fa-flag-checkered",
+                badge: "N64 MOD",
+                theme: "mario-kart-theme",
+                year: "2023",
+                players: "1-4",
+                difficulty: "Média",
+                image: "mario.jpeg"
+            },
+            {
+                id: "metalslug",
+                title: "Metal Slug",
+                description: "Run-and-gun clássico com animação desenhada à mão e ação frenética em co-op.",
+                genre: ["Ação", "Run and Gun", "Arcade"],
+                icon: "fa-gun",
+                badge: "ARCADE",
+                theme: "metal-slug-theme",
+                year: "1996",
+                players: "1-2",
+                difficulty: "Alta",
+                image: "slug.jpeg"
+            },
+            {
+                id: "metalgear",
+                title: "Metal Gear (MSX)",
+                description: "O jogo que criou o gênero stealth. Infiltre-se em Outer Heaven como Solid Snake.",
+                genre: ["Stealth", "Ação", "Infiltração"],
+                icon: "fa-user-secret",
+                badge: "MSX",
+                theme: "metal-gear-theme",
+                year: "1987",
+                players: "1",
+                difficulty: "Média",
+                image: "gear.jpeg"
+            },
+            {
+                id: "metalgear2",
+                title: "Metal Gear 2: Solid Snake",
+                description: "Evolução do stealth com radar, agachamento e história complexa.",
+                genre: ["Stealth", "Ação Tática", "MSX"],
+                icon: "fa-user-secret",
+                badge: "MSX",
+                theme: "metal-gear-theme",
+                year: "1990",
+                players: "1",
+                difficulty: "Alta",
+                image: "gear2.jpeg"
+            },
+            {
+                id: "metalgearsolid",
+                title: "Metal Gear Solid",
+                description: "Revolução cinematográfica que definiu os jogos de stealth 3D.",
+                genre: ["Stealth", "Cinematográfico", "Ação"],
+                icon: "fa-user-secret",
+                badge: "PS1",
+                theme: "metal-gear-theme",
+                year: "1998",
+                players: "1",
+                difficulty: "Alta",
+                image: "solid.jpeg"
             }
         ];
 
-        // Cores de thumbnail para cada jogo
-        const thumbnailColors = {
-            mk3: "linear-gradient(135deg, #8b0000 0%, #330000 100%)",
-            pokemon: "linear-gradient(135deg, #ffcc00 0%, #3366cc 100%)",
-            smash: "linear-gradient(135deg, #4a0072 0%, #9a4aff 100%)",
-            ctr: "linear-gradient(135deg, #ff4500 0%, #ff8c00 100%)",
-            crash: "linear-gradient(135deg, #ff8c00 0%, #654321 100%)",
-            dbz: "linear-gradient(135deg, #ff8c00 0%, #ff0000 100%)"
-        };
+        // Base URL para imagens no GitHub
+        const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/[SEU_USUARIO]/[SEU_REPOSITORIO]/main/imagens/';
 
         // ===== ELEMENTOS DO DOM =====
         const loadingScreen = document.getElementById('loadingScreen');
@@ -2258,6 +3008,8 @@
         const themeToggle = document.getElementById('themeToggle');
         const pages = document.querySelectorAll('.page, .game-page');
         const navLinks = document.querySelectorAll('.nav-link');
+        const gameSearch = document.getElementById('gameSearch');
+        const filterButtons = document.querySelectorAll('.filter-btn');
 
         // ===== INICIALIZAÇÃO =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -2285,12 +3037,20 @@
             
             // Configurar observador de interseção para animações
             setupIntersectionObserver();
+            
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
         });
 
         // ===== FUNÇÕES PRINCIPAIS =====
         function initGameCards() {
-            // Home page cards (apenas 3)
-            const featuredGames = [games[0], games[1], games[2]];
+            // Home page cards (apenas 6 destaque)
+            const featuredGames = games.slice(0, 6);
             renderGameCards(featuredGames, gameCardsContainer);
             
             // All games page cards (todos)
@@ -2304,15 +3064,17 @@
                 const card = document.createElement('div');
                 card.className = 'game-card animate-on-scroll';
                 card.dataset.gameId = game.id;
+                card.dataset.genre = game.genre.map(g => g.toLowerCase()).join(' ');
+                
+                // Usar imagem do GitHub
+                const imageUrl = `${GITHUB_RAW_URL}${game.image}`;
                 
                 card.innerHTML = `
-                    <div class="game-thumbnail" style="background: ${thumbnailColors[game.id]}">
+                    <div class="game-thumbnail" style="background-image: url('${imageUrl}');">
                         <div class="game-badge">${game.badge}</div>
-                        <div style="position: absolute; bottom: 20px; left: 20px; z-index: 2;">
-                            <h3 class="game-title"><i class="fas ${game.icon} game-icon"></i> ${game.title}</h3>
-                        </div>
                     </div>
                     <div class="game-info">
+                        <h3 class="game-title"><i class="fas ${game.icon} game-icon"></i> ${game.title}</h3>
                         <p class="game-description">${game.description}</p>
                         <div class="game-meta">
                             <div class="game-genre">
@@ -2334,6 +3096,12 @@
                 });
                 
                 container.appendChild(card);
+            });
+            
+            // Adicionar observador para cards recém-criados
+            const newCards = container.querySelectorAll('.animate-on-scroll');
+            newCards.forEach(card => {
+                observer.observe(card);
             });
         }
 
@@ -2396,6 +3164,40 @@
             }
         }
 
+        function filterGames() {
+            const searchTerm = gameSearch.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.genre || 'all';
+            const gameCards = allGamesContainer.querySelectorAll('.game-card');
+            
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const description = card.querySelector('.game-description').textContent.toLowerCase();
+                const genres = card.dataset.genre;
+                
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                const matchesFilter = activeFilter === 'all' || genres.includes(activeFilter);
+                
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByGenre(genre) {
+            // Ativar botão
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(genre) || (genre === 'all' && btn.textContent === 'Todos')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Aplicar filtro
+            filterGames();
+        }
+
         function initAnimations() {
             // Adicionar classe visible para elementos com animate-on-scroll
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
@@ -2404,8 +3206,10 @@
             });
         }
 
+        // ===== INTERSECTION OBSERVER =====
+        let observer;
         function setupIntersectionObserver() {
-            const observer = new IntersectionObserver((entries) => {
+            observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
@@ -2429,8 +3233,8 @@
                 showPage('home');
             }
             
-            // Números 1-6 abrem jogos correspondentes
-            if (e.key >= '1' && e.key <= '6') {
+            // Números 1-9 abrem jogos correspondentes
+            if (e.key >= '1' && e.key <= '9') {
                 const index = parseInt(e.key) - 1;
                 if (games[index]) {
                     showGamePage(games[index].id);
