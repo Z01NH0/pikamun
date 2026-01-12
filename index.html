@@ -21,11 +21,12 @@
             --accent-pink: #ff4ac2;
             --text-light: #f5f5ff;
             --text-gray: #b0b0d0;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --card-radius: 20px;
-            --glass-bg: rgba(21, 21, 48, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --card-radius: 16px;
+            --glass-bg: rgba(21, 21, 48, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --container-max: 1400px;
         }
 
         * {
@@ -42,18 +43,39 @@
             font-family: 'Roboto', sans-serif;
             background-color: var(--primary-dark);
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.6;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(74, 107, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 58, 58, 0.05) 0%, transparent 20%);
             min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(74, 107, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 80%, rgba(255, 58, 58, 0.05) 0%, transparent 25%);
+            transition: var(--transition);
+        }
+
+        /* ===== TEMA CLARO ===== */
+        body.light-theme {
+            --primary-dark: #f0f2ff;
+            --primary-blue: #e6e9ff;
+            --accent-blue: #3a5bff;
+            --accent-red: #e63946;
+            --accent-green: #2ecc71;
+            --accent-yellow: #f1c40f;
+            --accent-orange: #e67e22;
+            --accent-purple: #9b59b6;
+            --accent-pink: #e84393;
+            --text-light: #2c3e50;
+            --text-gray: #7f8c8d;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(58, 91, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 80%, rgba(230, 57, 70, 0.05) 0%, transparent 25%);
         }
 
         h1, h2, h3, h4, h5 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .pixel-font {
@@ -82,17 +104,17 @@
         }
 
         .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 8px solid var(--primary-blue);
-            border-top: 8px solid var(--accent-blue);
+            width: 70px;
+            height: 70px;
+            border: 6px solid var(--primary-blue);
+            border-top: 6px solid var(--accent-blue);
             border-radius: 50%;
             animation: spin 1.5s linear infinite;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .loading-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--accent-blue);
             animation: pulse 1.5s infinite;
         }
@@ -107,33 +129,35 @@
             50% { opacity: 0.5; }
         }
 
-        /* ===== HEADER GLASS ===== */
+        /* ===== HEADER COMPACTO ===== */
         header {
-            background: rgba(21, 21, 48, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 1rem 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 1.5rem;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--glass-border);
             transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1800px;
+            max-width: var(--container-max);
             margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             cursor: pointer;
             transition: var(--transition);
+            padding: 0.3rem 0;
         }
 
         .logo:hover {
@@ -141,9 +165,9 @@
         }
 
         .logo-icon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--accent-blue);
-            filter: drop-shadow(0 0 15px rgba(74, 107, 255, 0.5));
+            filter: drop-shadow(0 0 10px rgba(74, 107, 255, 0.3));
         }
 
         .logo-text {
@@ -152,7 +176,7 @@
         }
 
         .logo h1 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             -webkit-background-clip: text;
             background-clip: text;
@@ -160,14 +184,14 @@
         }
 
         .logo p {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-gray);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         .nav-menu {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
         }
 
@@ -175,33 +199,32 @@
             color: var(--text-light);
             text-decoration: none;
             font-weight: 600;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            letter-spacing: 0.8px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid transparent;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
-            background: rgba(74, 107, 255, 0.2);
+            background: rgba(74, 107, 255, 0.15);
             transform: translateY(-2px);
-            border-color: var(--accent-blue);
+            border-color: rgba(74, 107, 255, 0.3);
         }
 
         .nav-link.active {
-            background: rgba(74, 107, 255, 0.3);
+            background: rgba(74, 107, 255, 0.25);
             color: var(--accent-blue);
             border-color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 0 15px rgba(74, 107, 255, 0.2);
         }
 
         .menu-toggle {
             display: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--text-light);
             cursor: pointer;
             transition: var(--transition);
@@ -215,20 +238,20 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== MAIN CONTAINER ===== */
+        /* ===== MAIN CONTAINER COMPACTO ===== */
         .container {
-            max-width: 1800px;
+            max-width: var(--container-max);
             margin: 0 auto;
-            padding: 6rem 2.5rem 3rem;
+            padding: 5rem 1.5rem 2rem;
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO SECTION COMPACTA ===== */
         .hero {
             text-align: center;
-            padding: 4rem 2rem;
-            margin-bottom: 4rem;
+            padding: 3rem 1.5rem;
+            margin-bottom: 3rem;
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border-radius: var(--card-radius);
             border: 1px solid var(--glass-border);
             position: relative;
@@ -245,9 +268,9 @@
             height: 200%;
             background: linear-gradient(45deg, 
                 transparent 30%, 
-                rgba(74, 107, 255, 0.1) 50%, 
+                rgba(74, 107, 255, 0.08) 50%, 
                 transparent 70%);
-            animation: shine 3s infinite linear;
+            animation: shine 4s infinite linear;
             z-index: 1;
         }
 
@@ -262,10 +285,9 @@
         }
 
         .hero h2 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
             color: var(--text-light);
-            text-shadow: 0 0 30px rgba(74, 107, 255, 0.5);
         }
 
         .hero h2 .highlight {
@@ -277,34 +299,34 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
             color: var(--text-gray);
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 30px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 1.5px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             position: relative;
             overflow: hidden;
         }
@@ -327,32 +349,32 @@
         .btn-primary {
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             color: white;
-            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.25);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(74, 107, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 107, 255, 0.35);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-light);
-            border: 2px solid rgba(74, 107, 255, 0.3);
+            border: 2px solid rgba(74, 107, 255, 0.2);
             backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(74, 107, 255, 0.2);
-            transform: translateY(-5px);
+            background: rgba(74, 107, 255, 0.15);
+            transform: translateY(-3px);
             border-color: var(--accent-blue);
-            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.15);
         }
 
-        /* ===== GAME GRID MODERN ===== */
+        /* ===== SECTION TITLE ===== */
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             text-align: center;
             color: var(--text-light);
             position: relative;
@@ -364,19 +386,20 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 2px;
+            border-radius: 1.5px;
         }
 
+        /* ===== GAME GRID COMPACTO ===== */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .game-card {
@@ -388,15 +411,15 @@
             border: 1px solid var(--glass-border);
             position: relative;
             cursor: pointer;
-            height: 450px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             box-shadow: var(--shadow);
         }
 
         .game-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             border-color: var(--accent-blue);
         }
 
@@ -405,13 +428,13 @@
         }
 
         .game-thumbnail {
-            height: 220px;
+            height: 180px;
             width: 100%;
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
 
         .game-thumbnail::after {
@@ -424,47 +447,56 @@
             background: linear-gradient(to top, rgba(10, 10, 22, 0.9) 0%, transparent 50%);
         }
 
+        body.light-theme .game-thumbnail::after {
+            background: linear-gradient(to top, rgba(240, 242, 255, 0.9) 0%, transparent 50%);
+        }
+
         .game-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
             font-weight: bold;
             z-index: 2;
             border: 2px solid;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
+        }
+
+        body.light-theme .game-badge {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-light);
         }
 
         .game-info {
-            padding: 1.5rem;
+            padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
         .game-title {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
             color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .game-icon {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .game-description {
             color: var(--text-gray);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
             flex-grow: 1;
         }
 
@@ -477,16 +509,16 @@
 
         .game-genre {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
         .genre-tag {
             background: rgba(74, 107, 255, 0.15);
             color: var(--accent-blue);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 600;
             border: 1px solid rgba(74, 107, 255, 0.2);
         }
@@ -495,802 +527,24 @@
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(74, 107, 255, 0.25);
         }
 
         .play-btn:hover {
             transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 8px 20px rgba(74, 107, 255, 0.5);
+            box-shadow: 0 6px 16px rgba(74, 107, 255, 0.35);
         }
 
-        /* ===== GAME PAGES ===== */
-        .game-page {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .active-page {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid var(--glass-border);
-            position: relative;
-        }
-
-        .back-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            border: 2px solid var(--glass-border);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .back-btn:hover {
-            transform: translateX(-10px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--accent-blue);
-        }
-
-        .game-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        @media (max-width: 1100px) {
-            .game-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .game-frame-container {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--card-radius);
-            padding: 20px;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .game-frame {
-            width: 100%;
-            height: 550px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid var(--glass-border);
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .game-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .game-details {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: var(--card-radius);
-            padding: 2.5rem;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow);
-        }
-
-        .game-page-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .game-page-description {
-            margin-bottom: 2rem;
-            color: var(--text-gray);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .info-item {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.2rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--accent-blue);
-            transition: var(--transition);
-        }
-
-        .info-item:hover {
-            transform: translateY(-5px);
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .info-item h4 {
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .info-item p {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .controls {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            border: 1px solid var(--glass-border);
-        }
-
-        .controls h3 {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .control-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: var(--transition);
-        }
-
-        .control-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .key {
-            background: rgba(0, 0, 0, 0.4);
-            color: var(--text-light);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.8rem;
-            min-width: 60px;
-            text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .key-description {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        /* ===== THEME BACKGROUNDS ===== */
-        /* Mortal Kombat - Caveiras Vermelhas */
-        .mk-theme {
-            background-color: #1a0000;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 20%);
-        }
-
-        .mk-theme .game-header {
-            border-bottom-color: var(--accent-red);
-        }
-
-        .mk-theme .back-btn {
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-        }
-
-        .mk-theme .game-frame {
-            border-color: var(--accent-red);
-            box-shadow: 0 0 30px rgba(255, 58, 58, 0.3);
-        }
-
-        .mk-theme .info-item {
-            border-left-color: var(--accent-red);
-        }
-
-        .mk-theme .key {
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-        }
-
-        /* Pokémon - Céu Azul com Nuvens */
-        .pokemon-theme {
-            background-color: #87CEEB;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 30%),
-                radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 30%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pokemon-theme::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><path d="M50,50 C70,30 90,40 110,30 C130,20 150,30 170,40 C190,50 180,60 160,50 C140,40 120,50 100,60 C80,70 60,60 40,50 C20,40 30,70 50,50 Z" fill="rgba(255,255,255,0.3)"/></svg>');
-            background-size: 400px 200px;
-            animation: cloudsMove 60s linear infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes cloudsMove {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-200px); }
-        }
-
-        .pokemon-theme .game-header {
-            border-bottom-color: var(--accent-yellow);
-        }
-
-        .pokemon-theme .back-btn {
-            border-color: var(--accent-yellow);
-            color: #333;
-            background: rgba(255, 216, 58, 0.9);
-        }
-
-        .pokemon-theme .game-frame {
-            border-color: var(--accent-yellow);
-            box-shadow: 0 0 30px rgba(255, 216, 58, 0.3);
-        }
-
-        .pokemon-theme .info-item {
-            border-left-color: var(--accent-yellow);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .pokemon-theme .info-item h4 {
-            color: #333;
-        }
-
-        .pokemon-theme .info-item p {
-            color: #333;
-        }
-
-        .pokemon-theme .key {
-            border-color: var(--accent-yellow);
-            color: #333;
-            background: rgba(255, 216, 58, 0.9);
-        }
-
-        /* Crash Racing - Pista de Corrida */
-        .ctr-theme {
-            background-color: #2a7a3a;
-            background-image: 
-                linear-gradient(to bottom, #2a7a3a 0%, #1e5a2a 100%),
-                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 255, 255, 0.1) 50px, rgba(255, 255, 255, 0.1) 100px);
-            position: relative;
-        }
-
-        .ctr-theme .game-header {
-            border-bottom-color: #ff4500;
-        }
-
-        .ctr-theme .back-btn {
-            border-color: #ff4500;
-            color: #ff4500;
-        }
-
-        .ctr-theme .game-frame {
-            border-color: #ff4500;
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.3);
-        }
-
-        .ctr-theme .info-item {
-            border-left-color: #ff4500;
-        }
-
-        .ctr-theme .key {
-            border-color: #ff4500;
-            color: #ff4500;
-        }
-
-        /* Crash Bandicoot - Floresta */
-        .crash-theme {
-            background-color: #1a472a;
-            background-image: 
-                radial-gradient(circle at 10% 90%, rgba(107, 142, 35, 0.3) 0%, transparent 30%),
-                radial-gradient(circle at 90% 10%, rgba(34, 139, 34, 0.3) 0%, transparent 30%),
-                radial-gradient(circle at 50% 50%, rgba(85, 107, 47, 0.2) 0%, transparent 40%);
-        }
-
-        .crash-theme .game-header {
-            border-bottom-color: #ff8c00;
-        }
-
-        .crash-theme .back-btn {
-            border-color: #ff8c00;
-            color: #ff8c00;
-        }
-
-        .crash-theme .game-frame {
-            border-color: #ff8c00;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
-        }
-
-        .crash-theme .info-item {
-            border-left-color: #ff8c00;
-        }
-
-        .crash-theme .key {
-            border-color: #ff8c00;
-            color: #ff8c00;
-        }
-
-        /* Smash Bros - Arena */
-        .smash-theme {
-            background-color: #4a0072;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                repeating-conic-gradient(from 0deg, transparent 0deg 10deg, rgba(255, 255, 255, 0.05) 10deg 20deg);
-        }
-
-        .smash-theme .game-header {
-            border-bottom-color: #9a4aff;
-        }
-
-        .smash-theme .back-btn {
-            border-color: #9a4aff;
-            color: #9a4aff;
-        }
-
-        .smash-theme .game-frame {
-            border-color: #9a4aff;
-            box-shadow: 0 0 30px rgba(154, 74, 255, 0.3);
-        }
-
-        .smash-theme .info-item {
-            border-left-color: #9a4aff;
-        }
-
-        .smash-theme .key {
-            border-color: #9a4aff;
-            color: #9a4aff;
-        }
-
-        /* Dragon Ball Z - Espaço Sideral */
-        .dbz-theme {
-            background-color: #000033;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.3) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(255, 69, 0, 0.3) 0%, transparent 20%);
-        }
-
-        .dbz-theme .game-header {
-            border-bottom-color: #ff8c00;
-        }
-
-        .dbz-theme .back-btn {
-            border-color: #ff8c00;
-            color: #ff8c00;
-        }
-
-        .dbz-theme .game-frame {
-            border-color: #ff8c00;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
-        }
-
-        .dbz-theme .info-item {
-            border-left-color: #ff8c00;
-        }
-
-        .dbz-theme .key {
-            border-color: #ff8c00;
-            color: #ff8c00;
-        }
-
-        /* Metal Slug - Militar */
-        .metal-slug-theme {
-            background-color: #2a4a2a;
-            background-image: 
-                linear-gradient(45deg, #1a3a1a 25%, transparent 25%),
-                linear-gradient(-45deg, #1a3a1a 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #1a3a1a 75%),
-                linear-gradient(-45deg, transparent 75%, #1a3a1a 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-        }
-
-        .metal-slug-theme .game-header {
-            border-bottom-color: #8b4513;
-        }
-
-        .metal-slug-theme .back-btn {
-            border-color: #8b4513;
-            color: #8b4513;
-        }
-
-        .metal-slug-theme .game-frame {
-            border-color: #8b4513;
-            box-shadow: 0 0 30px rgba(139, 69, 19, 0.3);
-        }
-
-        .metal-slug-theme .info-item {
-            border-left-color: #8b4513;
-        }
-
-        .metal-slug-theme .key {
-            border-color: #8b4513;
-            color: #8b4513;
-        }
-
-        /* Metal Gear - Stealth */
-        .metal-gear-theme {
-            background-color: #1a1a2a;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.1) 2px, rgba(0, 255, 0, 0.1) 4px);
-        }
-
-        .metal-gear-theme .game-header {
-            border-bottom-color: #00ff00;
-        }
-
-        .metal-gear-theme .back-btn {
-            border-color: #00ff00;
-            color: #00ff00;
-        }
-
-        .metal-gear-theme .game-frame {
-            border-color: #00ff00;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
-        }
-
-        .metal-gear-theme .info-item {
-            border-left-color: #00ff00;
-        }
-
-        .metal-gear-theme .key {
-            border-color: #00ff00;
-            color: #00ff00;
-        }
-
-        /* Mario Kart - Colorido */
-        .mario-kart-theme {
-            background: linear-gradient(135deg, #ff3366, #33ccff, #ffcc00);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .mario-kart-theme .game-header {
-            border-bottom-color: #ff3366;
-        }
-
-        .mario-kart-theme .back-btn {
-            border-color: #ff3366;
-            color: #ff3366;
-        }
-
-        .mario-kart-theme .game-frame {
-            border-color: #ff3366;
-            box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
-        }
-
-        .mario-kart-theme .info-item {
-            border-left-color: #ff3366;
-        }
-
-        .mario-kart-theme .key {
-            border-color: #ff3366;
-            color: #ff3366;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: rgba(21, 21, 48, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 3rem 2.5rem 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-content {
-            max-width: 1800px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            margin-bottom: 2.5rem;
-        }
-
-        @media (max-width: 900px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .footer-column h3 {
-            color: var(--accent-blue);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-blue);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-            transform: translateX(5px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(74, 107, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        .social-link:hover {
-            background: var(--accent-blue);
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-            color: white;
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .game-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            }
-            
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-            
-            .container {
-                padding: 6rem 2rem 2rem;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 300px;
-                height: calc(100vh - 70px);
-                background: rgba(21, 21, 48, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 2rem;
-                transition: right 0.4s ease;
-                border-left: 1px solid var(--glass-border);
-                z-index: 999;
-            }
-            
-            .nav-menu.active {
-                right: 0;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 5rem 1.5rem 2rem;
-            }
-            
-            header {
-                padding: 1rem 1.5rem;
-            }
-            
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .game-content {
-                gap: 2rem;
-            }
-            
-            .game-frame {
-                height: 400px;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero {
-                padding: 3rem 1.5rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .game-page-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--primary-blue);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-blue);
-            border-radius: 6px;
-            border: 3px solid var(--primary-blue);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-purple);
-        }
-
-        /* ===== UTILITY CLASSES ===== */
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-1 { margin-bottom: 1rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        .mb-3 { margin-bottom: 3rem; }
-        .mb-4 { margin-bottom: 4rem; }
-
-        .mt-1 { margin-top: 1rem; }
-        .mt-2 { margin-top: 2rem; }
-        .mt-3 { margin-top: 3rem; }
-        .mt-4 { margin-top: 4rem; }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== FILTERS AND SEARCH ===== */
+        /* ===== FILTERS COMPACTOS ===== */
         .filters {
             display: flex;
             justify-content: space-between;
@@ -1298,34 +552,48 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--glass-border);
         }
 
         .search-box {
             flex: 1;
-            max-width: 400px;
+            max-width: 350px;
             position: relative;
+            min-width: 250px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 1rem 1.5rem 1rem 3rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.9rem 1.2rem 0.9rem 2.8rem;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
-            border-radius: 50px;
+            border-radius: 25px;
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: var(--transition);
+        }
+
+        body.light-theme .search-box input {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .search-box input:focus {
             outline: none;
             border-color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 0 15px rgba(74, 107, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        body.light-theme .search-box input:focus {
+            background: rgba(0, 0, 0, 0.08);
         }
 
         .search-box i {
             position: absolute;
-            left: 1.2rem;
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-gray);
@@ -1338,20 +606,606 @@
         }
 
         .filter-btn {
-            padding: 0.6rem 1.2rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
-            border-radius: 50px;
+            border-radius: 20px;
             color: var(--text-gray);
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        body.light-theme .filter-btn {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .filter-btn:hover, .filter-btn.active {
             background: rgba(74, 107, 255, 0.2);
             color: var(--accent-blue);
             border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* ===== GAME PAGES ===== */
+        .game-page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 2px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .game-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 1100px) {
+            .game-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .game-frame-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        body.light-theme .game-frame-container {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--glass-border);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-details {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+
+        .game-page-title {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .game-page-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        body.light-theme .info-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .info-item:hover {
+            transform: translateY(-3px);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .info-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item h4 {
+            color: var(--text-gray);
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.8px;
+        }
+
+        .info-item p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .controls {
+            background: rgba(0, 0, 0, 0.15);
+            padding: 1.5rem;
+            border-radius: var(--card-radius);
+            margin-top: 1.5rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        body.light-theme .controls {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .controls h3 {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .control-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.9rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        body.light-theme .control-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .control-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .control-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .key {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            min-width: 50px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .key {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .key-description {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER COMPACTO ===== */
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 2.5rem 1.5rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .footer-column h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(74, 107, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--accent-blue);
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(74, 107, 255, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 4.5rem 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 60px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1.5rem;
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--glass-border);
+                z-index: 999;
+                gap: 0.5rem;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 1.2rem 1.5rem;
+            }
+            
+            header {
+                padding: 0.8rem 1.2rem;
+            }
+            
+            .game-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            
+            .game-card {
+                height: 380px;
+            }
+            
+            .game-thumbnail {
+                height: 160px;
+            }
+            
+            .game-content {
+                gap: 1.2rem;
+            }
+            
+            .game-frame {
+                height: 350px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 2rem 1.2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .game-page-title {
+                font-size: 1.7rem;
+            }
+            
+            .footer-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .game-card {
+                height: 360px;
+            }
+            
+            .game-thumbnail {
+                height: 140px;
+            }
+            
+            .game-frame {
+                height: 300px;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-blue);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 5px;
+            border: 2px solid var(--primary-blue);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 1.5rem; }
+        .mb-3 { margin-bottom: 2rem; }
+        .mb-4 { margin-bottom: 2.5rem; }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 1.5rem; }
+        .mt-3 { margin-top: 2rem; }
+        .mt-4 { margin-top: 2.5rem; }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NO CONTENT MESSAGE ===== */
+        .no-games {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .no-games i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -1417,15 +1271,15 @@
                 </div>
             </div>
 
-            <h2 class="section-title mb-4">JOGOS EM DESTAQUE</h2>
+            <h2 class="section-title mb-3">JOGOS EM DESTAQUE</h2>
             
             <div class="game-grid" id="game-cards-container">
                 <!-- Game cards will be generated by JavaScript -->
             </div>
             
-            <div class="game-details mt-4 animate-on-scroll">
+            <div class="game-details mt-3 animate-on-scroll">
                 <h3 class="game-page-title text-center">POR QUE JOGAR CONOSCO?</h3>
-                <div class="info-grid mt-3">
+                <div class="info-grid mt-2">
                     <div class="info-item">
                         <h4><i class="fas fa-bolt"></i> CARREGAMENTO RÁPIDO</h4>
                         <p>Jogos otimizados para carregamento instantâneo</p>
@@ -1467,17 +1321,24 @@
                     <button class="filter-btn" onclick="filterByGenre('corrida')">Corrida</button>
                     <button class="filter-btn" onclick="filterByGenre('plataforma')">Plataforma</button>
                     <button class="filter-btn" onclick="filterByGenre('acao')">Ação</button>
+                    <button class="filter-btn" onclick="filterByGenre('aventura')">Aventura</button>
                 </div>
             </div>
             
             <div class="game-grid" id="all-games-container">
                 <!-- All games will be loaded here -->
             </div>
+            
+            <div class="no-games" id="noGamesMessage" style="display: none;">
+                <i class="fas fa-gamepad"></i>
+                <h3>Nenhum jogo encontrado</h3>
+                <p>Tente usar termos diferentes ou selecione outra categoria.</p>
+            </div>
         </div>
 
         <!-- Game Pages -->
         <!-- Mortal Kombat 3 Page -->
-        <div id="mk3-page" class="game-page mk-theme">
+        <div id="mk3-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-skull-crossbones"></i> ULTIMATE MORTAL KOMBAT 3</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -1535,9 +1396,6 @@
                     <p class="game-page-description">
                         Ultimate Mortal Kombat 3 é a versão definitiva do terceiro capítulo da lendária série de luta da Midway. Lançado em 1995, este jogo expandiu radicalmente o elenco original do MK3, trazendo de volta personagens icônicos como Scorpion, Reptile e Kitana, totalizando 22 lutadores jogáveis.
                     </p>
-                    <p class="game-page-description">
-                        Com novos stages, fatalities brutais, combos aprimorados e o sistema "Run" que permitia correr rapidamente pela arena, UMK3 é considerado por muitos fãs como o ápice da série clássica. O jogo também introduziu os "Animalities" e "Friendships", adicionando ainda mais variedade ao já extenso arsenal de finalizações.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -1581,7 +1439,7 @@
         </div>
 
         <!-- Pokémon Evolved Page -->
-        <div id="pokemon-page" class="game-page pokemon-theme">
+        <div id="pokemon-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-bolt"></i> POKÉMON EVOLVED</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -1639,9 +1497,6 @@
                     <p class="game-page-description">
                         Pokémon Evolved é um dos ROM hacks mais ambiciosos já criados para Pokémon FireRed. Este mod expande radicalmente a experiência original com todas as 8 gerações de Pokémon (até Galar), novos mapas, mecânicas modernizadas e uma história completamente refeita.
                     </p>
-                    <p class="game-page-description">
-                        Com gráficos atualizados, sistema de batalha da 8ª geração, Mega Evoluções, Pokémon Dinamax e mais de 100 horas de conteúdo, Pokémon Evolved é praticamente um jogo novo. A região de Kanto foi completamente redesenhada com novas áreas, ginásios desafiantes e uma trama que envolve uma organização misteriosa que ameaça o equilíbrio Pokémon mundial.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -1686,7 +1541,7 @@
         </div>
 
         <!-- Super Smash Bros Page -->
-        <div id="smash-page" class="game-page smash-theme">
+        <div id="smash-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-fist-raised"></i> SUPER SMASH BROS</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -1744,9 +1599,6 @@
                     <p class="game-page-description">
                         Super Smash Bros é o jogo que revolucionou os fighters de party game quando foi lançado para Nintendo 64 em 1999. Criado por Masahiro Sakurai, este título reuniu os maiores ícones da Nintendo em batalhas caóticas onde o objetivo não é reduzir a barra de vida do oponente, mas sim jogá-lo para fora da tela.
                     </p>
-                    <p class="game-page-description">
-                        Com 12 personagens desbloqueáveis (8 iniciais + 4 secretos), 9 estágios inspirados nas franquias mais amadas da Nintendo e um sistema de dano único baseado em porcentagem, Smash Bros criou um gênero próprio. O jogo também apresenta mais de 20 itens especiais, desde a Home-Run Bat até o mítico Poké Ball que invoca criaturas Pokémon para ajudar na batalha.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -1791,7 +1643,7 @@
         </div>
 
         <!-- Crash Team Racing Page -->
-        <div id="ctr-page" class="game-page ctr-theme">
+        <div id="ctr-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-flag-checkered"></i> CRASH TEAM RACING</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -1849,9 +1701,6 @@
                     <p class="game-page-description">
                         Crash Team Racing (CTR) é considerado por muitos como o melhor kart racer da era PS1, rivalizando diretamente com Mario Kart 64. Desenvolvido pela Naughty Dog em 1999, CTR trouxe um sistema de drift revolucionário, uma campanha Adventure Mode completa e um elenco carismático de personagens do universo Crash Bandicoot.
                     </p>
-                    <p class="game-page-description">
-                        Diferente de outros jogos do gênero, CTR possui uma campanha solo robusta com história, chefees desafiadores e pistas que exigem domínio de técnicas avançadas como "power sliding" e "boost reserves". O jogo também se destaca pela trilha sonora cativante, pistas criativas com atalhos secretos e um sistema de power-ups balanceado que mantém as corridas sempre imprevisíveis.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -1897,7 +1746,7 @@
         </div>
 
         <!-- Crash Bandicoot Page -->
-        <div id="crash-page" class="game-page crash-theme">
+        <div id="crash-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-mask"></i> CRASH BANDICOOT</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -1955,9 +1804,6 @@
                     <p class="game-page-description">
                         Crash Bandicoot é o jogo que definiu a identidade da PlayStation nos anos 90 e estabeleceu a Naughty Dog como uma das maiores desenvolvedoras do mundo. Lançado em 1996, este plataforma 3D apresentou Crash, um bandicoot mutante criado pelo maléfico Dr. Neo Cortex que se rebela contra seu criador para salvar sua namorada Tawna.
                     </p>
-                    <p class="game-page-description">
-                        Com sua jogabilidade única que mistura perspectivas 2.5D e 3D, níveis desafiadores repletos de armadilhas criativas, chefes memoráveis e um visual colorido que aproveitou ao máximo o hardware do PS1, Crash Bandicoot se tornou instantaneamente um ícone. O jogo também é conhecido por sua dificuldade desafiadora mas justa, e por introduzir elementos como caixas (Wumpa, TNT, Nitro) que se tornaram marcas registradas da série.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2004,7 +1850,7 @@
         </div>
 
         <!-- Dragon Ball Z Page -->
-        <div id="dbz-page" class="game-page dbz-theme">
+        <div id="dbz-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-dragon"></i> DRAGON BALL Z: SUPERSONIC WARRIORS</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2062,9 +1908,6 @@
                     <p class="game-page-description">
                         Dragon Ball Z: Supersonic Warriors é um dos melhores jogos de luta de Dragon Ball já lançados para Game Boy Advance. Desenvolvido pela Arc System Works (os mesmos de Guilty Gear), este jogo apresenta batalhas aéreas em 2D, sistema de equipes, transformações em tempo real e uma história "What If" que permite criar combinações inéditas de personagens.
                     </p>
-                    <p class="game-page-description">
-                        Diferente de outros fighters de DBZ, Supersonic Warriors foca em combos aéreos, sistema de assistência onde personagens de reserva podem entrar na batalha para ajudar, e um modo história não-linear com múltiplos finais. O jogo cobre desde a Saga Saiyajin até a Saga Buu, com mais de 20 personagens jogáveis, cada um com movimentos especiais fiéis ao anime e transformações icônicas como Super Saiyajin.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2110,7 +1953,7 @@
         </div>
 
         <!-- Mario Kart 64 Page -->
-        <div id="mariokart-page" class="game-page mario-kart-theme">
+        <div id="mariokart-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-flag-checkered"></i> MARIO KART 64 AMPED UP</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2164,9 +2007,6 @@
                     <p class="game-page-description">
                         Mario Kart 64 Amped Up é um mod revolucionário que transforma o clássico de 1996 em uma experiência completamente nova. Com novas pistas, personagens, itens e mecânicas, este mod mantém a essência do jogo original enquanto adiciona conteúdo moderno e desafios inéditos.
                     </p>
-                    <p class="game-page-description">
-                        O mod inclui mais de 50 novas pistas cuidadosamente projetadas, novos personagens como Waluigi e Daisy, itens exclusivos e um sistema de drift aprimorado. Todas as pistas originais foram remasterizadas com melhorias visuais, enquanto as novas pistas trazem designs criativos que vão desde recriações de outros jogos da Nintendo até circuitos completamente originais.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2212,7 +2052,7 @@
         </div>
 
         <!-- Metal Slug Page -->
-        <div id="metalslug-page" class="game-page metal-slug-theme">
+        <div id="metalslug-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-gun"></i> METAL SLUG</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2266,9 +2106,6 @@
                     <p class="game-page-description">
                         Metal Slug é um clássico dos run-and-gun que definiu o gênero nos arcades. Lançado em 1996 pela SNK, este jogo combina ação frenética com um estilo de animação desenhado à mão que permanece impressionante até hoje. Os jogadores controlam Marco Rossi ou Tarma Roving em uma missão para deter o General Morden e seu exército rebelde.
                     </p>
-                    <p class="game-page-description">
-                        Com seu senso de humor único, animação fluida, variedade de armas e veículos destrutíveis (os famosos "Metal Slugs"), o jogo oferece uma experiência co-op inesquecível. Cada fase é repleta de segredos, prisioneiros para resgatar e chefes épicos que testam os reflexos dos jogadores.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2314,7 +2151,7 @@
         </div>
 
         <!-- Metal Gear Page -->
-        <div id="metalgear-page" class="game-page metal-gear-theme">
+        <div id="metalgear-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR (MSX)</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2368,9 +2205,6 @@
                     <p class="game-page-description">
                         Metal Gear (1987) é o jogo que criou o gênero stealth action e deu início à lendária série de Hideo Kojima. Originalmente lançado para o MSX2, o jogo apresenta Solid Snake em sua primeira missão para infiltrar-se na fortaleza Outer Heaven e destruir o super-arma "Metal Gear".
                     </p>
-                    <p class="game-page-description">
-                        Diferente dos jogos de ação convencionais da época, Metal Gear incentiva os jogadores a evitar combates diretos, usar disfarces, se esconder em caixas e coletar itens para progressão. A narrativa complexa, reviravoltas surpreendentes e temas políticos já estavam presentes neste primeiro capítulo, estabelecendo o tom para toda a série.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2416,7 +2250,7 @@
         </div>
 
         <!-- Metal Gear 2 Page -->
-        <div id="metalgear2-page" class="game-page metal-gear-theme">
+        <div id="metalgear2-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR 2: SOLID SNAKE</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2474,9 +2308,6 @@
                     <p class="game-page-description">
                         Metal Gear 2: Solid Snake (1990) é uma enorme evolução sobre o original e estabeleceu praticamente todos os elementos que definiram a série. Com gráficos aprimorados, jogabilidade mais refinada e uma história muito mais complexa, este jogo é considerado por muitos fãs como o verdadeiro precursor de Metal Gear Solid.
                     </p>
-                    <p class="game-page-description">
-                        O jogo introduziu mecânicas essenciais como rastreamento por radar, agachamento, perseguição visual dos inimigos, e um sistema de stealth muito mais profundo. A narrativa apresenta temas ambientais, dilemas morais e personagens memoráveis como Gray Fox e Dr. Madnar, estabelecendo a profundidade filosófica que tornaria a série famosa.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2523,7 +2354,7 @@
         </div>
 
         <!-- Metal Gear Solid Page -->
-        <div id="metalgearsolid-page" class="game-page metal-gear-theme">
+        <div id="metalgearsolid-page" class="game-page">
             <div class="game-header">
                 <h2 class="game-page-title"><i class="fas fa-user-secret"></i> METAL GEAR SOLID</h2>
                 <button class="back-btn" onclick="showPage('games')">
@@ -2581,9 +2412,6 @@
                     <p class="game-page-description">
                         Metal Gear Solid (1998) revolucionou a indústria dos games ao combinar cinematografia hollywoodiana com jogabilidade de stealth profunda. Considerado um dos maiores jogos de todos os tempos, MGS elevou o videogame como meio narrativo, apresentando temas complexos, personagens memoráveis e uma experiência imersiva sem precedentes.
                     </p>
-                    <p class="game-page-description">
-                        Com sua direção cinematográfica, dublagem premiada, trilha sonora épica e mecânicas de jogo inovadoras, Metal Gear Solid definiu o padrão para jogos de stealth. A história segue Solid Snake em sua missão para neutralizar a unidade de forças especiais FOXHOUND que tomou controle de uma instalação nuclear no Alasca, ameaçando lançar um ataque nuclear.
-                    </p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -2629,6 +2457,318 @@
             </div>
         </div>
 
+        <!-- JoJo's Bizarre Adventure Page -->
+        <div id="jojo-page" class="game-page">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-star"></i> JOJO'S BIZARRE ADVENTURE</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">ARCADE</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/8843-jojos-bizarre-adventure%3A-heritage-for-the-future-jojo-no-kimyou-na-bouken%3A-mirai-e-no-isan-japan-990927-no-cd.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Ataque Leve (Light Attack)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Ataque Médio (Medium Attack)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">C</div>
+                                <div class="key-description">Ataque Pesado (Heavy Attack)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Stand (Ativar/Desativar)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Stand Rush (Ataque Stand)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ESPAÇO</div>
+                                <div class="key-description">Insert Coin (Ficha)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        JoJo's Bizarre Adventure: Heritage for the Future é um jogo de luta baseado na Parte 3: Stardust Crusaders do famoso mangá de Hirohiko Araki. Desenvolvido pela Capcom, este jogo se destaca por seu sistema de "Stands" - manifestações psíquicas que lutam junto com seus usuários.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>1999</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>Arcade / Dreamcast / PS1</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Luta 2D / Anime</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>Capcom</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> PERSONAGENS</h4>
+                            <p>20+ personagens</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-ghost"></i> STANDS</h4>
+                            <p>Sistema único de dupla luta</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> SISTEMA DE STANDS</h3>
+                        <p class="game-page-description">
+                            • <strong>Stand On/Off:</strong> Pressione A para ativar/desativar<br>
+                            • <strong>Stand Rush:</strong> S + direção para ataque especial<br>
+                            • <strong>Time Stop:</strong> Jotaro e DIO podem parar o tempo<br>
+                            • <strong>Character Types:</strong> Stand Users, Hamon Users, Others<br>
+                            • <strong>Special Moves:</strong> Cada personagem tem movimentos únicos<br>
+                            • <strong>Combos:</strong> Sistema de combos similar aos VS da Capcom<br>
+                            • <strong>Super Moves:</strong> Barra de Special para ataques especiais<br>
+                            • <strong>Dual Health:</strong> Personagem e Stand têm HP separados
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Super Mario World 4 Player Page -->
+        <div id="marioworld-page" class="game-page">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-mushroom"></i> SUPER MARIO WORLD 4 PLAYER</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">SNES HACK</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/43944-super-mario-world-4-player.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS P1</div>
+                                <div class="key-description">Movimentação P1</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z P1</div>
+                                <div class="key-description">Pular (Jump) P1</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X P1</div>
+                                <div class="key-description">Correr/Atirar (Run/Fire) P1</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">WASD P2</div>
+                                <div class="key-description">Movimentação P2</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">J P2</div>
+                                <div class="key-description">Pular (Jump) P2</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">K P2</div>
+                                <div class="key-description">Correr/Atirar (Run/Fire) P2</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">SELECT</div>
+                                <div class="key-description">Modo 4 jogadores</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Super Mario World 4 Player é um hack que transforma o clássico de SNES em uma experiência cooperativa para até 4 jogadores simultâneos. Baseado no jogo original de 1990, este mod permite que múltiplos jogadores explorem juntos os mundos de Dinosaur Land, enfrentem Bowser e salvem a Princesa Peach.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> BASE ORIGINAL</h4>
+                            <p>1990 (SNES)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>Super Nintendo (Hack)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Plataforma / Co-op / Aventura</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR ORIGINAL</h4>
+                            <p>Nintendo EAD</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> JOGADORES</h4>
+                            <p>1-4 jogadores (co-op)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-layer-group"></i> MUNDOS</h4>
+                            <p>8 mundos + especiais</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> MODOS DE JOGO E DICAS</h3>
+                        <p class="game-page-description">
+                            • <strong>Co-op:</strong> Trabalhem juntos para completar fases<br>
+                            • <strong>Competição:</strong> Compitam por moedas e power-ups<br>
+                            • <strong>Personagens:</strong> Mario, Luigi, Peach, Toad disponíveis<br>
+                            • <strong>Power-ups:</strong> Compartilhem itens para ajudar todos<br>
+                            • <strong>Fases Secretas:</strong> Explorem juntos para descobrir segredos<br>
+                            • <strong>Save States:</strong> Use para salvar progresso multiplayers<br>
+                            • <strong>Estratégia:</strong> Um jogador pode ajudar outros a alcançar áreas altas<br>
+                            • <strong>Boss Fights:</strong> Coordenem ataques contra chefes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sonic The Hedgehog Page -->
+        <div id="sonic-page" class="game-page">
+            <div class="game-header">
+                <h2 class="game-page-title"><i class="fas fa-running"></i> SONIC THE HEDGEHOG</h2>
+                <button class="back-btn" onclick="showPage('games')">
+                    <i class="fas fa-arrow-left"></i> VOLTAR AOS JOGOS
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="game-frame-container">
+                    <div class="game-badge">GENESIS</div>
+                    <div class="game-frame">
+                        <iframe src="https://www.retrogames.cc/embed/27910-sonic-the-hedgehog-genesis-u-trashman.html" width="100%" height="100%" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>
+                    </div>
+                    <div class="controls mt-2">
+                        <h3><i class="fas fa-keyboard"></i> CONTROLES DO JOGO</h3>
+                        <div class="controls-grid">
+                            <div class="control-item">
+                                <div class="key">SETAS</div>
+                                <div class="key-description">Movimentação / Direção</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">Z</div>
+                                <div class="key-description">Pular (Jump)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">ENTER</div>
+                                <div class="key-description">Start / Pause</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">A</div>
+                                <div class="key-description">Menu / Opções</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">S</div>
+                                <div class="key-description">Reset / Reiniciar</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">C</div>
+                                <div class="key-description">Modo Turbo (Acelerar)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">X</div>
+                                <div class="key-description">Salvar Estado (Save State)</div>
+                            </div>
+                            <div class="control-item">
+                                <div class="key">V</div>
+                                <div class="key-description">Carregar Estado (Load State)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-details">
+                    <h3 class="game-page-title">SOBRE O JOGO</h3>
+                    <p class="game-page-description">
+                        Sonic the Hedgehog (1991) foi o jogo que apresentou ao mundo o ouriço azul mais rápido do mundo e estabeleceu a Sega como uma séria concorrente da Nintendo nos anos 90. Com sua jogabilidade focada em velocidade, level design não-linear e uma trilha sonora icônica, Sonic redefiniu o que um jogo de plataforma poderia ser.
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar-alt"></i> LANÇAMENTO</h4>
+                            <p>Junho de 1991</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-microchip"></i> PLATAFORMA</h4>
+                            <p>Sega Genesis / Mega Drive</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chess-board"></i> GÊNERO</h4>
+                            <p>Plataforma / Ação / Velocidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-building"></i> DESENVOLVEDOR</h4>
+                            <p>Sonic Team / Sega</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> PROTAGONISTA</h4>
+                            <p>Sonic the Hedgehog</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-layer-group"></i> ZONAS</h4>
+                            <p>6 zonas + especiais</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <h3><i class="fas fa-lightbulb"></i> DICAS DE VELOCIDADE E ANÉIS</h3>
+                        <p class="game-page-description">
+                            • <strong>Velocidade:</strong> Mantenha o momentum para acessar áreas secretas<br>
+                            • <strong>Anéis:</strong> Colete 50+ anéis para ganhar vida extra<br>
+                            • <strong>Invulnerabilidade:</strong> Quando atingido, você tem alguns segundos para recuperar anéis<br>
+                            • <strong>Springs:</strong> Use molas para alcançar áreas altas<br>
+                            • <strong>Loops:</strong> Mantenha velocidade para completar loops<br>
+                            • <strong>Checkpoints:</strong> Passe pelos postes para salvar progresso<br>
+                            • <strong>Chaos Emeralds:</strong> Encontre Special Stages para coletar Esmeraldas<br>
+                            • <strong>Finais:</strong> Colete todas as Esmeraldas para o verdadeiro final
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- About Page -->
         <div id="about-page" class="page">
             <div class="game-header">
@@ -2645,7 +2785,7 @@
                         O RetroGameHub nasceu da paixão por preservar e compartilhar a rica história dos videogames. Em uma era de gráficos ultra-realistas e mundos abertos gigantescos, acreditamos que os jogos clássicos ainda têm muito a ensinar e proporcionar em termos de jogabilidade pura, design criativo dentro de limitações técnicas e narrativas atemporais.
                     </p>
                     
-                    <div class="info-grid mt-3">
+                    <div class="info-grid mt-2">
                         <div class="info-item">
                             <h4><i class="fas fa-history"></i> PRESERVAÇÃO</h4>
                             <p>Mantendo clássicos acessíveis para novas gerações</p>
@@ -2664,12 +2804,12 @@
                         </div>
                     </div>
                     
-                    <h3 class="game-page-title mt-4">TECNOLOGIA POR TRÁS</h3>
+                    <h3 class="game-page-title mt-3">TECNOLOGIA POR TRÁS</h3>
                     <p class="game-page-description">
                         Utilizamos emulação baseada em WebAssembly (Emscripten) que compila os emuladores originais para rodar diretamente no navegador. Esta tecnologia permite:
                     </p>
                     
-                    <div class="controls mt-3">
+                    <div class="controls mt-2">
                         <div class="controls-grid">
                             <div class="control-item">
                                 <div class="key"><i class="fas fa-bolt"></i></div>
@@ -2687,30 +2827,6 @@
                                 <div class="key"><i class="fas fa-paint-brush"></i></div>
                                 <div class="key-description">Filtros gráficos e melhorias visuais</div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="game-page-title mt-4">NOSSA EQUIPE</h3>
-                    <p class="game-page-description">
-                        Somos uma equipe de desenvolvedores, designers e historiadores de games dedicados a criar a melhor experiência retrô possível. Cada jogo em nosso catálogo passa por um processo cuidadoso de:
-                    </p>
-                    
-                    <div class="info-grid mt-3">
-                        <div class="info-item">
-                            <h4>1. SELEÇÃO</h4>
-                            <p>Escolha dos jogos mais significativos historicamente</p>
-                        </div>
-                        <div class="info-item">
-                            <h4>2. TESTES</h4>
-                            <p>Verificação completa de compatibilidade e performance</p>
-                        </div>
-                        <div class="info-item">
-                            <h4>3. CONTROLES</h4>
-                            <p>Configuração otimizada para teclado e gamepad</p>
-                        </div>
-                        <div class="info-item">
-                            <h4>4. CONTEÚDO</h4>
-                            <p>Pesquisa histórica e criação de guias detalhados</p>
                         </div>
                     </div>
                 </div>
@@ -2733,7 +2849,7 @@
                         Valorizamos muito o feedback de nossa comunidade. Se você tem sugestões de jogos, encontrou algum problema, quer reportar um bug ou tem interesse em parcerias, estamos aqui para ajudar.
                     </p>
                     
-                    <div class="info-grid mt-3">
+                    <div class="info-grid mt-2">
                         <div class="info-item">
                             <h4><i class="fas fa-envelope"></i> E-MAIL PRINCIPAL</h4>
                             <p>contato@retrogamehub.com</p>
@@ -2752,37 +2868,7 @@
                         </div>
                     </div>
                     
-                    <h3 class="game-page-title mt-4">COMUNIDADE</h3>
-                    <p class="game-page-description">
-                        Junte-se à nossa comunidade crescente de jogadores retrô nas redes sociais:
-                    </p>
-                    
-                    <div class="controls mt-3">
-                        <div class="controls-grid">
-                            <div class="control-item" style="flex-direction: column; align-items: flex-start;">
-                                <h4><i class="fab fa-discord"></i> DISCORD</h4>
-                                <p class="key-description">Participe de torneios, discussões e eventos ao vivo</p>
-                                <a href="#" style="color: var(--accent-blue); margin-top: 10px;">discord.gg/retrogamehub</a>
-                            </div>
-                            <div class="control-item" style="flex-direction: column; align-items: flex-start;">
-                                <h4><i class="fab fa-reddit"></i> REDDIT</h4>
-                                <p class="key-description">Compartilhe memes, descobertas e faça AMAs</p>
-                                <a href="#" style="color: var(--accent-blue); margin-top: 10px;">r/RetroGameHub</a>
-                            </div>
-                            <div class="control-item" style="flex-direction: column; align-items: flex-start;">
-                                <h4><i class="fab fa-twitter"></i> TWITTER</h4>
-                                <p class="key-description">Notícias, atualizações e curiosidades diárias</p>
-                                <a href="#" style="color: var(--accent-blue); margin-top: 10px;">@RetroGameHub</a>
-                            </div>
-                            <div class="control-item" style="flex-direction: column; align-items: flex-start;">
-                                <h4><i class="fab fa-youtube"></i> YOUTUBE</h4>
-                                <p class="key-description">Gameplays, análises e documentários</p>
-                                <a href="#" style="color: var(--accent-blue); margin-top: 10px;">youtube.com/retrogamehub</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="game-page-title mt-4">POLÍTICA DE CONTEÚDO</h3>
+                    <h3 class="game-page-title mt-3">POLÍTICA DE CONTEÚDO</h3>
                     <p class="game-page-description">
                         O RetroGameHub opera sob a política de fair use para fins educacionais e de preservação histórica. Todos os jogos disponíveis são considerados abandonware ou possuem permissão dos detentores de direitos. Se você é detentor de direitos de algum conteúdo e acredita que ele não deveria estar aqui, entre em contato imediatamente.
                     </p>
@@ -2811,7 +2897,7 @@
                         <li><a href="#" onclick="showGamePage('mk3')"><i class="fas fa-skull"></i> Mortal Kombat 3</a></li>
                         <li><a href="#" onclick="showGamePage('pokemon')"><i class="fas fa-bolt"></i> Pokémon Evolved</a></li>
                         <li><a href="#" onclick="showGamePage('smash')"><i class="fas fa-fist-raised"></i> Super Smash Bros</a></li>
-                        <li><a href="#" onclick="showGamePage('ctr')"><i class="fas fa-flag-checkered"></i> Crash Team Racing</a></li>
+                        <li><a href="#" onclick="showGamePage('sonic')"><i class="fas fa-running"></i> Sonic the Hedgehog</a></li>
                     </ul>
                 </div>
                 
@@ -2828,22 +2914,22 @@
                 
                 <div class="footer-column">
                     <h3>CONECTE-SE</h3>
-                    <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    <p style="color: var(--text-gray); margin-bottom: 1.2rem;">
                         Siga-nos nas redes sociais para atualizações, novidades e eventos especiais.
                     </p>
                     <div class="social-links">
-                        <a href="https://youtu.be/dQw4w9WgXcQ?si=0cpbNlXUWRqa1iZA" class="social-link"><i class="fab fa-discord"></i></a>
-                        <a href="https://youtu.be/dQw4w9WgXcQ?si=0cpbNlXUWRqa1iZA" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="https://youtu.be/dQw4w9WgXcQ?si=0cpbNlXUWRqa1iZA" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://youtu.be/dQw4w9WgXcQ?si=0cpbNlXUWRqa1iZA" class="social-link"><i class="fab fa-reddit"></i></a>
+                        <a href="https://garticphone.com/pt" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="data:image/jpeg;base64,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" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/@1155doET" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/Z01NH0" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://youtu.be/dQw4w9WgXcQ?si=7iR3iB46HkCUWDty" class="social-link"><i class="fab fa-reddit"></i></a>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
                 <p>© 2023 RetroGameHub. Todos os direitos reservados. Este site é para fins educacionais e de preservação histórica.</p>
-                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">Nintendo, PlayStation, Sega e todas as marcas relacionadas são propriedade de seus respectivos donos.</p>
+                <p style="margin-top: 8px; font-size: 0.8rem; opacity: 0.7;">Nintendo, PlayStation, Sega e todas as marcas relacionadas são propriedade de seus respectivos donos.</p>
             </div>
         </div>
     </footer>
@@ -2858,7 +2944,6 @@
                 genre: ["Luta", "Arcade", "Violento"],
                 icon: "fa-skull-crossbones",
                 badge: "ARCADE",
-                theme: "mk-theme",
                 year: "1995",
                 players: "1-2",
                 difficulty: "Alta",
@@ -2871,7 +2956,6 @@
                 genre: ["RPG", "Aventura", "Coleta"],
                 icon: "fa-bolt",
                 badge: "GBA HACK",
-                theme: "pokemon-theme",
                 year: "2022",
                 players: "1",
                 difficulty: "Média",
@@ -2884,7 +2968,6 @@
                 genre: ["Luta", "Party", "Multijogador"],
                 icon: "fa-fist-raised",
                 badge: "N64",
-                theme: "smash-theme",
                 year: "1999",
                 players: "1-4",
                 difficulty: "Média",
@@ -2897,7 +2980,6 @@
                 genre: ["Corrida", "Kart", "Multijogador"],
                 icon: "fa-flag-checkered",
                 badge: "PS1",
-                theme: "ctr-theme",
                 year: "1999",
                 players: "1-4",
                 difficulty: "Alta",
@@ -2910,7 +2992,6 @@
                 genre: ["Plataforma", "Aventura", "3D"],
                 icon: "fa-mask",
                 badge: "PS1",
-                theme: "crash-theme",
                 year: "1996",
                 players: "1",
                 difficulty: "Muito Alta",
@@ -2923,7 +3004,6 @@
                 genre: ["Luta", "Anime", "Ação"],
                 icon: "fa-dragon",
                 badge: "GBA",
-                theme: "dbz-theme",
                 year: "2004",
                 players: "1-2",
                 difficulty: "Média",
@@ -2936,7 +3016,6 @@
                 genre: ["Corrida", "Kart", "Mod"],
                 icon: "fa-flag-checkered",
                 badge: "N64 MOD",
-                theme: "mario-kart-theme",
                 year: "2023",
                 players: "1-4",
                 difficulty: "Média",
@@ -2949,7 +3028,6 @@
                 genre: ["Ação", "Run and Gun", "Arcade"],
                 icon: "fa-gun",
                 badge: "ARCADE",
-                theme: "metal-slug-theme",
                 year: "1996",
                 players: "1-2",
                 difficulty: "Alta",
@@ -2962,7 +3040,6 @@
                 genre: ["Stealth", "Ação", "Infiltração"],
                 icon: "fa-user-secret",
                 badge: "MSX",
-                theme: "metal-gear-theme",
                 year: "1987",
                 players: "1",
                 difficulty: "Média",
@@ -2975,7 +3052,6 @@
                 genre: ["Stealth", "Ação Tática", "MSX"],
                 icon: "fa-user-secret",
                 badge: "MSX",
-                theme: "metal-gear-theme",
                 year: "1990",
                 players: "1",
                 difficulty: "Alta",
@@ -2988,16 +3064,51 @@
                 genre: ["Stealth", "Cinematográfico", "Ação"],
                 icon: "fa-user-secret",
                 badge: "PS1",
-                theme: "metal-gear-theme",
                 year: "1998",
                 players: "1",
                 difficulty: "Alta",
                 image: "solid.jpeg"
+            },
+            {
+                id: "jojo",
+                title: "JoJo's Bizarre Adventure",
+                description: "Jogo de luta da Capcom baseado no mangá com sistema único de Stands.",
+                genre: ["Luta", "Anime", "Arcade"],
+                icon: "fa-star",
+                badge: "ARCADE",
+                year: "1999",
+                players: "1-2",
+                difficulty: "Alta",
+                image: "jojo.jpeg"
+            },
+            {
+                id: "marioworld",
+                title: "Super Mario World 4 Player",
+                description: "Hack que transforma o clássico em uma aventura cooperativa para 4 jogadores.",
+                genre: ["Plataforma", "Co-op", "Aventura"],
+                icon: "fa-mushroom",
+                badge: "SNES HACK",
+                year: "2020",
+                players: "1-4",
+                difficulty: "Média",
+                image: "world.jpeg"
+            },
+            {
+                id: "sonic",
+                title: "Sonic the Hedgehog",
+                description: "O ouriço azul mais rápido do mundo em sua aventura inaugural no Genesis.",
+                genre: ["Plataforma", "Ação", "Velocidade"],
+                icon: "fa-running",
+                badge: "GENESIS",
+                year: "1991",
+                players: "1",
+                difficulty: "Média",
+                image: "sonic.jpeg"
             }
         ];
 
-        // Base URL para imagens no GitHub
-        const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/Z01NH0/pikamun/main/imagens/';
+        // Base URL para imagens no GitHub (ATUALIZE COM SEU USUÁRIO E REPOSITÓRIO)
+       const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/Z01NH0/pikamun/main/imagens/';
 
         // ===== ELEMENTOS DO DOM =====
         const loadingScreen = document.getElementById('loadingScreen');
@@ -3010,16 +3121,24 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const gameSearch = document.getElementById('gameSearch');
         const filterButtons = document.querySelectorAll('.filter-btn');
+        const noGamesMessage = document.getElementById('noGamesMessage');
 
         // ===== INICIALIZAÇÃO =====
         document.addEventListener('DOMContentLoaded', function() {
+            // Verificar tema salvo
+            const savedTheme = localStorage.getItem('retrogamehub-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema Escuro';
+            }
+            
             // Simular carregamento
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
                 initGameCards();
                 initAnimations();
                 showPage('home');
-            }, 1500);
+            }, 1200);
             
             // Configurar toggle do menu mobile
             menuToggle.addEventListener('click', function() {
@@ -3049,7 +3168,7 @@
 
         // ===== FUNÇÕES PRINCIPAIS =====
         function initGameCards() {
-            // Home page cards (apenas 6 destaque)
+            // Home page cards (6 primeiros jogos)
             const featuredGames = games.slice(0, 6);
             renderGameCards(featuredGames, gameCardsContainer);
             
@@ -3070,7 +3189,7 @@
                 const imageUrl = `${GITHUB_RAW_URL}${game.image}`;
                 
                 card.innerHTML = `
-                    <div class="game-thumbnail" style="background-image: url('${imageUrl}');">
+                    <div class="game-thumbnail" style="background-image: url('${imageUrl}'); background-color: var(--primary-blue);">
                         <div class="game-badge">${game.badge}</div>
                     </div>
                     <div class="game-info">
@@ -3146,14 +3265,16 @@
 
         function toggleTheme() {
             const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
+            const isLight = body.classList.contains('light-theme');
             
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i> Tema Escuro';
+            if (isLight) {
+                body.classList.remove('light-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i> Tema Claro';
+                localStorage.setItem('retrogamehub-theme', 'dark');
             } else {
-                body.setAttribute('data-theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema Claro';
+                body.classList.add('light-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Tema Escuro';
+                localStorage.setItem('retrogamehub-theme', 'light');
             }
         }
 
@@ -3166,8 +3287,9 @@
 
         function filterGames() {
             const searchTerm = gameSearch.value.toLowerCase();
-            const activeFilter = document.querySelector('.filter-btn.active').dataset.genre || 'all';
+            const activeFilter = document.querySelector('.filter-btn.active').textContent.toLowerCase();
             const gameCards = allGamesContainer.querySelectorAll('.game-card');
+            let visibleCount = 0;
             
             gameCards.forEach(card => {
                 const title = card.querySelector('.game-title').textContent.toLowerCase();
@@ -3175,21 +3297,33 @@
                 const genres = card.dataset.genre;
                 
                 const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
-                const matchesFilter = activeFilter === 'all' || genres.includes(activeFilter);
+                const matchesFilter = activeFilter === 'todos' || genres.includes(activeFilter);
                 
                 if (matchesSearch && matchesFilter) {
                     card.style.display = 'flex';
+                    visibleCount++;
                 } else {
                     card.style.display = 'none';
                 }
             });
+            
+            // Mostrar/ocultar mensagem de nenhum jogo encontrado
+            if (visibleCount === 0) {
+                noGamesMessage.style.display = 'block';
+            } else {
+                noGamesMessage.style.display = 'none';
+            }
         }
 
         function filterByGenre(genre) {
-            // Ativar botão
+            // Ativar botão clicado
             filterButtons.forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(genre) || (genre === 'all' && btn.textContent === 'Todos')) {
+            });
+            
+            // Encontrar e ativar o botão correspondente
+            filterButtons.forEach(btn => {
+                if (btn.textContent.toLowerCase() === genre || (genre === 'all' && btn.textContent === 'Todos')) {
                     btn.classList.add('active');
                 }
             });
@@ -3217,7 +3351,7 @@
                 });
             }, {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                rootMargin: '0px 0px -30px 0px'
             });
             
             // Observar todos os elementos com animate-on-scroll
@@ -3246,43 +3380,21 @@
             if (e.key.toLowerCase() === 'g') showPage('games');
         });
 
-        // ===== GAMEPAD SUPPORT =====
-        let gamepadIndex = null;
-        
-        function checkGamepad() {
-            const gamepads = navigator.getGamepads();
-            if (gamepads[0]) {
-                if (gamepadIndex === null) {
-                    gamepadIndex = 0;
-                    console.log('Gamepad conectado!');
-                }
-                
-                // Botão 0 (A) - ação principal
-                if (gamepads[0].buttons[0].pressed) {
-                    // Implementar ação baseada na página atual
-                }
-                
-                // Botão 1 (B) - voltar
-                if (gamepads[0].buttons[1].pressed) {
-                    showPage('home');
-                }
-            } else if (gamepadIndex !== null) {
-                gamepadIndex = null;
-                console.log('Gamepad desconectado!');
+        // ===== URL PARAMS PARA COMPARTILHAMENTO =====
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const page = params.get('page');
+            const game = params.get('game');
+            
+            if (page) {
+                showPage(page);
+            } else if (game) {
+                showGamePage(game);
             }
         }
-        
-        // Verificar gamepad a cada 100ms
-        setInterval(checkGamepad, 100);
 
-        // ===== PERFORMANCE OPTIMIZATION =====
-        let resizeTimeout;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(function() {
-                // Recalcular layouts se necessário
-            }, 250);
-        });
+        // Chamar na inicialização
+        window.addEventListener('load', getUrlParams);
     </script>
 </body>
 </html>
